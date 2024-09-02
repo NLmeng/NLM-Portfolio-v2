@@ -1,5 +1,5 @@
-import LeftSection from "./components/LeftSection";
-import SocialButton from "./components/SocialButton";
+import LeftSection from "@/components/LeftSection";
+import SocialButton from "@/components/SocialButton";
 
 export default function Home() {
   return (
