@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function SocialButton() {
+export default function HorizontalAccordionSocials() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (

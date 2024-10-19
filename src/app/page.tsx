@@ -1,12 +1,12 @@
-import LeftSection from "@/components/LeftSection";
-import SocialButton from "@/components/SocialButton";
+import HorizontalAccordionSocials from "@/components/HorizontalAccordionSocials";
+import LeftNavigator from "@/components/LeftNavigator";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen bg-black text-white">
-      <SocialButton />
-      <LeftSection />
-      <main className="ml-48 w-full flex justify-center items-center flex-col">
+      <HorizontalAccordionSocials />
+      <LeftNavigator />
+      <main className="w-full flex justify-center items-center flex-col">
         <section
           id="about"
           className="h-screen flex items-center justify-center"
