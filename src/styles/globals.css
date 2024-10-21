@@ -12,6 +12,8 @@
   --main-purple: 202, 174, 241;
   --main-red: 246, 87, 81;
   --main-orange: 253, 143, 93;
+  --main-orange-dark: 228, 128, 83;
+  --main-orange-darker: 204, 114, 74;
   --clean-white: 255, 255, 255;
   scroll-behavior: smooth;
 }
@@ -53,7 +55,6 @@
 }
 
 body {
-  animation: pulse 2s infinite;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -62,13 +63,6 @@ body {
     )
     rgb(var(--background-start-rgb));
   font-family: var(--font-inter);
-}
-
-body {
-  animation: pulse 2s infinite;
-}
-
-body {
   cursor: none;
 }
 
@@ -97,4 +91,21 @@ body {
   pointer-events: none;
   z-index: 9998;
   animation: fadeOut 0.5s ease forwards;
+}
+
+.animated-oval {
+  position: fixed;
+  top: 50%;
+  left: -25px;
+  transform: translateY(-50%);
+  z-index: 10000;
+}
+
+@keyframes RotateBorder {
+  0% {
+    transform: rotate(0deg) scaleY(2);
+  }
+  100% {
+    transform: rotate(360deg) scaleY(2);
+  }
 }
