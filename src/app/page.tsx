@@ -1,4 +1,4 @@
-import HorizontalAccordionSocials from "@/components/HorizontalAccordionSocials";
+import HorizontalAccordionSocials from "@/components/Accordion";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
 
 export default function Home() {
