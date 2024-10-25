@@ -76,6 +76,7 @@ export function LeftNavigator() {
     </div>
   );
 }
+
 export function OvalNavigator() {
   const outerPerimeter = 420.48;
   const innerPerimeter = 364.6;
