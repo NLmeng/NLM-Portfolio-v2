@@ -1,4 +1,5 @@
 import HorizontalAccordionSocials from "@/components/Accordion";
+import SimpleCarousel from "@/components/Carousel";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
 
 export default function Home() {
@@ -14,7 +15,9 @@ export default function Home() {
             className="h-screen flex items-center justify-center"
           >
             <div className="text-center">
-              <div className="text-[rgb(var(--main-orange))] text-6xl">Lymeng Naret</div>
+              <div className="text-[rgb(var(--main-orange))] text-6xl">
+                Lymeng Naret
+              </div>
               <div className="text-[rgb(var(--clean-white))] mt-4">
                 SOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER
               </div>
@@ -23,26 +26,24 @@ export default function Home() {
 
           <section
             id="experience"
-            className="h-screen flex items-center justify-center"
+            className="min-h-fit flex flex-col items-center justify-center space-y-4 text-center pb-12"
           >
-            <div className="flex flex-col space-y-4 text-center">
-              <div className="border border-[rgb(var(--main-purple))] p-4">
-                -Present PLACE HOLDER CARD 1
-              </div>
-              <div className="border border-[rgb(var(--main-purple))] p-4">
-                -2023 PLACE HOLDER CARD 2
-              </div>
-              <div className="border border-[rgb(var(--main-purple))] p-4">
-                -2022 PLACE HOLDER CARD 3
-              </div>
+            <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
+              -Present PLACE HOLDER CARD 1
+            </div>
+            <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
+              -2023 PLACE HOLDER CARD 2
+            </div>
+            <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
+              -2022 PLACE HOLDER CARD 3
             </div>
           </section>
 
           <section
             id="projects"
-            className="h-screen flex items-center justify-center"
+            className="h-[50vh] flex flex-col justify-center items-center"
           >
-            <div>Projects section content here...</div>
+            <SimpleCarousel />
           </section>
         </main>
       </div>

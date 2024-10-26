@@ -44,7 +44,13 @@ export function LeftNavigator() {
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 60) {
+        const sectionHeight = section.offsetHeight;
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
           activeSection = section.getAttribute("id") || "ABOUT";
         }
       });
