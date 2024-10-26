@@ -16,13 +16,17 @@ const NavigationItem = ({
   return (
     <li
       className={`flex items-center cursor-pointer ${
-        isActive ? "font-bold text-red" : "text-orange"
+        isActive
+          ? "font-bold text-[rgb(var(--main-red))]"
+          : "text-[rgb(var(--main-orange))]"
       }`}
       onClick={onClick}
     >
       <span
         className={`block h-0.5 ${
-          isActive ? "bg-red w-16" : "bg-orange w-8"
+          isActive
+            ? "bg-[rgb(var(--main-red))] w-16"
+            : "bg-[rgb(var(--main-orange))] w-8"
         } mr-4 transition-all duration-300`}
       ></span>
       {section}
