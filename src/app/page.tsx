@@ -1,5 +1,5 @@
 import HorizontalAccordionSocials from "@/components/Accordion";
-import CircleAnimation from "@/components/CircleAnimation";
+import CircularBorder from "@/components/Circle";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
 
 export default function Home() {
@@ -44,14 +44,14 @@ export default function Home() {
             className="z-100 relative h-[50vh] flex flex-col justify-end items-center "
           >
             <div className="absolute top-0 h-[50vh] w-[80vw] z-101">
-              <CircleAnimation
+              <CircularBorder
                 direction="clockwise"
                 numDots={84}
                 color="rgb(var(--clean-white))"
               />
             </div>
             <div className="absolute top-[5vh] h-[45vh] w-[75vw] z-102">
-              <CircleAnimation direction="counter" numDots={84} />
+              <CircularBorder direction="counter" numDots={84} />
             </div>
           </section>
         </main>

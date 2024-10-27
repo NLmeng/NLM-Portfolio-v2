@@ -1,15 +1,18 @@
+// TODO: start animation only when project is active
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const NavigationItem = ({
-  section,
-  currentSection,
-  onClick,
-}: {
+interface NavigationItemProps {
   section: string;
   currentSection: string;
   onClick: () => void;
+}
+
+const NavigationItem: React.FC<NavigationItemProps> = ({
+  section,
+  currentSection,
+  onClick,
 }) => {
   const isActive = currentSection === section;
 
@@ -34,23 +37,23 @@ const NavigationItem = ({
   );
 };
 
-export function LeftNavigator() {
-  const [currentSection, setCurrentSection] = useState("ABOUT");
+export const LeftNavigator: React.FC = () => {
+  const [currentSection, setCurrentSection] = useState<string>("ABOUT");
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = document.querySelectorAll("section");
+      const sections = document.querySelectorAll<HTMLElement>("section");
       let activeSection = "ABOUT";
+      let maxVisibleArea = 0;
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        const rect = section.getBoundingClientRect();
+        const visibleHeight =
+          Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        const visibleArea = Math.max(0, visibleHeight);
 
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
+        if (visibleArea > maxVisibleArea) {
+          maxVisibleArea = visibleArea;
           activeSection = section.getAttribute("id") || "ABOUT";
         }
       });
@@ -59,13 +62,22 @@ export function LeftNavigator() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavigationClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      const sectionRect = section.getBoundingClientRect();
+      const sectionTop = window.scrollY + sectionRect.top;
+      const scrollPosition =
+        sectionTop - (window.innerHeight - sectionRect.height) / 2;
+
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -85,7 +97,7 @@ export function LeftNavigator() {
       </ul>
     </div>
   );
-}
+};
 
 export function OvalNavigator() {
   const outerPerimeter = 420.48;

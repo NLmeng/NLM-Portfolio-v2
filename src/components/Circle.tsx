@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-export default function CircleAnimation({
+// TODO: better name
+export default function CircularBorder({
   color = "rgb(var(--main-orange))",
   direction = "clockwise",
   numDots = 84,
