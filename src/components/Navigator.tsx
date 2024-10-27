@@ -1,28 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
+import { useCurrentSection } from "@/hooks/useCurrentSection";
 
-const NavigationItem = ({
-  section,
-  currentSection,
-  onClick,
-}: {
+interface NavigationItemProps {
   section: string;
   currentSection: string;
   onClick: () => void;
+}
+
+const NavigationItem: React.FC<NavigationItemProps> = ({
+  section,
+  currentSection,
+  onClick,
 }) => {
   const isActive = currentSection === section;
 
   return (
     <li
       className={`flex items-center cursor-pointer ${
-        isActive ? "font-bold text-red" : "text-orange"
+        isActive
+          ? "font-bold text-[rgb(var(--main-red))]"
+          : "text-[rgb(var(--main-orange))]"
       }`}
       onClick={onClick}
     >
       <span
         className={`block h-0.5 ${
-          isActive ? "bg-red w-16" : "bg-orange w-8"
+          isActive
+            ? "bg-[rgb(var(--main-red))] w-16"
+            : "bg-[rgb(var(--main-orange))] w-8"
         } mr-4 transition-all duration-300`}
       ></span>
       {section}
@@ -30,35 +37,12 @@ const NavigationItem = ({
   );
 };
 
-export function LeftNavigator() {
-  const [currentSection, setCurrentSection] = useState("ABOUT");
+interface LeftNavigatorProps {
+  onNavigate: (sectionId: string) => void;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll("section");
-      let activeSection = "ABOUT";
-
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 60) {
-          activeSection = section.getAttribute("id") || "ABOUT";
-        }
-      });
-
-      setCurrentSection(activeSection.toUpperCase());
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavigationClick = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
+export const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
+  const currentSection = useCurrentSection();
   const sections = ["ABOUT", "EXPERIENCE", "PROJECTS"];
 
   return (
@@ -69,13 +53,13 @@ export function LeftNavigator() {
             key={section}
             section={section}
             currentSection={currentSection}
-            onClick={() => handleNavigationClick(section.toLowerCase())}
+            onClick={() => onNavigate(section.toLowerCase())}
           />
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export function OvalNavigator() {
   const outerPerimeter = 420.48;
