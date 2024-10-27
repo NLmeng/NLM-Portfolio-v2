@@ -1,5 +1,5 @@
 import HorizontalAccordionSocials from "@/components/Accordion";
-import SimpleCarousel from "@/components/Carousel";
+import CircleAnimation from "@/components/CircleAnimation";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
 
 export default function Home() {
@@ -41,9 +41,18 @@ export default function Home() {
 
           <section
             id="projects"
-            className="h-[50vh] flex flex-col justify-center items-center"
+            className="z-100 relative h-[50vh] flex flex-col justify-end items-center "
           >
-            <SimpleCarousel />
+            <div className="absolute top-0 h-[50vh] w-[80vw] z-101">
+              <CircleAnimation
+                direction="clockwise"
+                numDots={84}
+                color="rgb(var(--clean-white))"
+              />
+            </div>
+            <div className="absolute top-[5vh] h-[45vh] w-[75vw] z-102">
+              <CircleAnimation direction="counter" numDots={84} />
+            </div>
           </section>
         </main>
       </div>
