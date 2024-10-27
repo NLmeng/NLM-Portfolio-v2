@@ -1,7 +1,7 @@
-// TODO: start animation only when project is active
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useCurrentSection } from "@/hooks/useCurrentSection";
 
 interface NavigationItemProps {
   section: string;
@@ -37,50 +37,12 @@ const NavigationItem: React.FC<NavigationItemProps> = ({
   );
 };
 
-export const LeftNavigator: React.FC = () => {
-  const [currentSection, setCurrentSection] = useState<string>("ABOUT");
+interface LeftNavigatorProps {
+  onNavigate: (sectionId: string) => void;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll<HTMLElement>("section");
-      let activeSection = "ABOUT";
-      let maxVisibleArea = 0;
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        const visibleHeight =
-          Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-        const visibleArea = Math.max(0, visibleHeight);
-
-        if (visibleArea > maxVisibleArea) {
-          maxVisibleArea = visibleArea;
-          activeSection = section.getAttribute("id") || "ABOUT";
-        }
-      });
-
-      setCurrentSection(activeSection.toUpperCase());
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavigationClick = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const sectionRect = section.getBoundingClientRect();
-      const sectionTop = window.scrollY + sectionRect.top;
-      const scrollPosition =
-        sectionTop - (window.innerHeight - sectionRect.height) / 2;
-
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
+export const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
+  const currentSection = useCurrentSection();
   const sections = ["ABOUT", "EXPERIENCE", "PROJECTS"];
 
   return (
@@ -91,7 +53,7 @@ export const LeftNavigator: React.FC = () => {
             key={section}
             section={section}
             currentSection={currentSection}
-            onClick={() => handleNavigationClick(section.toLowerCase())}
+            onClick={() => onNavigate(section.toLowerCase())}
           />
         ))}
       </ul>

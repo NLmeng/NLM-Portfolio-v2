@@ -1,20 +1,38 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCurrentSection } from "@/hooks/useCurrentSection";
+import React, { useEffect, useRef, useState } from "react";
+interface CircularBorderProps {
+  color?: string;
+  direction?: "clockwise" | "counter";
+  numDots?: number;
+  delayIncrement?: number;
+  radiusOffset?: number;
+}
 
-// TODO: better name
-export default function CircularBorder({
+const CircularBorder: React.FC<CircularBorderProps> = ({
   color = "rgb(var(--main-orange))",
   direction = "clockwise",
   numDots = 84,
   delayIncrement = 0.1,
   radiusOffset = 0,
-}) {
-  const containerRef = useRef(null);
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const currentSection = useCurrentSection();
+  const [hasAnimationStarted, setHasAnimationStarted] = useState(false);
 
   useEffect(() => {
-    const container = containerRef.current;
+    if (currentSection === "PROJECTS" && !hasAnimationStarted) {
+      setHasAnimationStarted(true);
+    }
+  }, [currentSection, hasAnimationStarted]);
 
+  useEffect(() => {
+    if (!hasAnimationStarted) {
+      return;
+    }
+
+    const container = containerRef.current;
     if (!container) return;
 
     const renderDots = () => {
@@ -22,12 +40,9 @@ export default function CircularBorder({
 
       const width = container.offsetWidth;
       const height = container.offsetHeight;
-
       const centerX = width / 2;
       const centerY = height;
-
       const topAdjust = 42;
-
       const radiusX = width / 2 - radiusOffset - topAdjust;
       const radiusY = height - radiusOffset - topAdjust;
 
@@ -58,8 +73,19 @@ export default function CircularBorder({
     renderDots();
 
     window.addEventListener("resize", renderDots);
-    return () => window.removeEventListener("resize", renderDots);
-  }, [color, direction, numDots, delayIncrement, radiusOffset]);
+    return () => {
+      window.removeEventListener("resize", renderDots);
+      // ?: clean up the container on unmount if needed
+      // container.innerHTML = "";
+    };
+  }, [
+    hasAnimationStarted,
+    color,
+    direction,
+    numDots,
+    delayIncrement,
+    radiusOffset,
+  ]);
 
   return (
     <div
@@ -67,4 +93,6 @@ export default function CircularBorder({
       className="absolute w-full h-full overflow-hidden"
     ></div>
   );
-}
+};
+
+export default CircularBorder;
