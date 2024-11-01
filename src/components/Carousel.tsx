@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+}
+
+const projects: Project[] = [
   {
     title: "Project One",
     description: "This is a placeholder for project one.",
@@ -22,8 +27,8 @@ const projects = [
   },
 ];
 
-export default function SimpleCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const SimpleCarousel: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -68,15 +73,14 @@ export default function SimpleCarousel() {
       </button>
     </div>
   );
-}
+};
 
-function SimpleCard({
-  title,
-  description,
-}: {
+interface SimpleCardProps {
   title: string;
   description: string;
-}) {
+}
+
+const SimpleCard: React.FC<SimpleCardProps> = ({ title, description }) => {
   return (
     <div className="bg-[rgb(var(--clean-white))] p-6 rounded-md shadow-md text-center text-[rgb(var(--main-black))]">
       <h3 className="text-2xl font-bold text-[rgb(var(--main-orange))]">
@@ -85,4 +89,6 @@ function SimpleCard({
       <p className="mt-2 text-lg">{description}</p>
     </div>
   );
-}
+};
+
+export default SimpleCarousel;

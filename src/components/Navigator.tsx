@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
+import React from "react";
 
 interface NavigationItemProps {
   section: string;
@@ -41,9 +41,9 @@ interface LeftNavigatorProps {
   onNavigate: (sectionId: string) => void;
 }
 
-export const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
+const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
   const currentSection = useCurrentSection();
-  const sections = ["ABOUT", "EXPERIENCE", "PROJECTS"];
+  const sections: string[] = ["ABOUT", "EXPERIENCE", "PROJECTS"];
 
   return (
     <div className="ml-6 fixed left-6 top-1/2 transform -translate-y-1/2 z-40 w-48 flex flex-col items-center">
@@ -61,7 +61,7 @@ export const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
   );
 };
 
-export function OvalNavigator() {
+const OvalNavigator: React.FC = () => {
   const outerPerimeter = 420.48;
   const innerPerimeter = 364.6;
   const outerGap = 14.016;
@@ -114,4 +114,6 @@ export function OvalNavigator() {
       </svg>
     </div>
   );
-}
+};
+
+export { LeftNavigator, OvalNavigator };
