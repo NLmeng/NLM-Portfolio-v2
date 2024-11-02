@@ -69,7 +69,7 @@ const OvalNavigator: React.FC = () => {
   const innerOffset = innerGap / 2;
 
   return (
-    <div className="animated-oval">
+    <div className="fixed top-1/2 left-[-25px] transform -translate-y-1/2 z-[999]">
       <svg width="50" height="200" viewBox="0 0 50 200">
         <ellipse
           cx="25"
