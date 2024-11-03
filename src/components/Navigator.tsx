@@ -1,7 +1,7 @@
 "use client";
 
 import { useCurrentSection } from "@/hooks/useCurrentSection";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface NavigationItemProps {
   section: string;
@@ -66,7 +66,55 @@ const OvalNavigator: React.FC = () => {
   const innerPerimeter = 364.6;
   const outerGap = 14.016;
   const innerGap = 14.023;
-  const innerOffset = innerGap / 2;
+
+  const [isIdle, setIsIdle] = useState(true);
+  const [outerDashOffset, setOuterDashOffset] = useState(0);
+  const [innerDashOffset, setInnerDashOffset] = useState(0);
+  const lastScrollY = useRef(0);
+  const idleTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      lastScrollY.current = window.scrollY;
+    }
+
+    const handleScroll = () => {
+      if (idleTimeout.current) {
+        clearTimeout(idleTimeout.current);
+      }
+
+      setIsIdle(false);
+
+      const currentScrollY = window.scrollY;
+      const deltaY = currentScrollY - lastScrollY.current;
+      lastScrollY.current = currentScrollY;
+
+      const scrollFactor = 1;
+      setOuterDashOffset(
+        (prev) => (prev + deltaY * scrollFactor) % outerPerimeter
+      );
+      setInnerDashOffset(
+        (prev) => (prev - deltaY * scrollFactor) % innerPerimeter
+      );
+
+      idleTimeout.current = setTimeout(() => {
+        setIsIdle(true);
+      }, 3000);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    idleTimeout.current = setTimeout(() => {
+      setIsIdle(true);
+    }, 3000);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (idleTimeout.current) {
+        clearTimeout(idleTimeout.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="fixed top-1/2 left-[-25px] transform -translate-y-1/2 z-[999]">
@@ -81,16 +129,15 @@ const OvalNavigator: React.FC = () => {
           strokeWidth="7"
           strokeDasharray={`0,${outerGap}`}
           strokeLinecap="round"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to={`${outerPerimeter}`}
-            dur="20s"
-            repeatCount="indefinite"
-            calcMode="linear"
-          />
-        </ellipse>
+          style={{
+            animationName: isIdle ? "outerRotate" : "none",
+            animationDuration: "20s",
+            animationTimingFunction: "linear",
+            animationIterationCount: "infinite",
+            animationDirection: "normal",
+            strokeDashoffset: isIdle ? undefined : outerDashOffset,
+          }}
+        />
         <ellipse
           cx="25"
           cy="100"
@@ -101,16 +148,15 @@ const OvalNavigator: React.FC = () => {
           strokeWidth="7"
           strokeDasharray={`0,${innerGap}`}
           strokeLinecap="round"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from={`${innerPerimeter + innerOffset}`}
-            to={`${innerOffset}`}
-            dur="15s"
-            repeatCount="indefinite"
-            calcMode="linear"
-          />
-        </ellipse>
+          style={{
+            animationName: isIdle ? "innerRotate" : "none",
+            animationDuration: "15s",
+            animationTimingFunction: "linear",
+            animationIterationCount: "infinite",
+            animationDirection: isIdle ? "normal" : "reverse",
+            strokeDashoffset: isIdle ? undefined : innerDashOffset,
+          }}
+        />
       </svg>
     </div>
   );
