@@ -3,8 +3,8 @@
 import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
-export default function HorizontalAccordionSocials() {
-  const [isExpanded, setIsExpanded] = useState(false);
+const HorizontalAccordionSocials: React.FC = () => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
     <div className="fixed top-4 left-4 flex items-center">
@@ -24,7 +24,7 @@ export default function HorizontalAccordionSocials() {
       </button>
 
       <div
-        className={`flex items-center transition-[width, opacity] duration-500 ease-in-out relative ml-[-2px] z-30 overflow-hidden `}
+        className={`flex items-center transition-[width, opacity] duration-500 ease-in-out relative ml-[-2px] z-30 overflow-hidden`}
         style={{
           width: isExpanded ? "200px" : "0px",
           opacity: isExpanded ? 1 : 0,
@@ -61,4 +61,6 @@ export default function HorizontalAccordionSocials() {
       </div>
     </div>
   );
-}
+};
+
+export default HorizontalAccordionSocials;

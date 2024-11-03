@@ -1,88 +1,71 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
+import React, { useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
-const projects = [
-  {
-    title: "Project One",
-    description: "This is a placeholder for project one.",
-  },
-  {
-    title: "Project Two",
-    description: "This is a placeholder for project two.",
-  },
-  {
-    title: "Project Three",
-    description: "This is a placeholder for project three.",
-  },
-  {
-    title: "Project Four",
-    description: "This is a placeholder for project four.",
-  },
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const projects: Project[] = [
+  { id: 0, title: "Project 1", description: "Description of Project 1" },
+  { id: 1, title: "Project 2", description: "Description of Project 2" },
+  { id: 2, title: "Project 3", description: "Description of Project 3" },
 ];
 
-export default function SimpleCarousel() {
+interface ProjectCarouselProps {
+  onRotate: (direction: "left" | "right") => void;
+}
+
+const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    onRotate("right");
+  };
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? projects.length - 1 : prevIndex - 1
     );
+    onRotate("left");
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  const handlers = useSwipeable({
+    onSwipedLeft: handleNext,
+    onSwipedRight: handlePrev,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   return (
-    <div className="w-full max-w-3xl mx-auto relative mt-16">
-      <div className="overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {projects.map((project, index) => (
-            <div key={index} className="min-w-full p-4">
-              <SimpleCard
-                title={project.title}
-                description={project.description}
-              />
-            </div>
-          ))}
-        </div>
+    <div
+      {...handlers}
+      className="relative h-full w-full flex items-center justify-center overflow-hidden mt-5"
+    >
+      <button
+        className="absolute left-[5vw] z-103 "
+        onClick={handlePrev}
+        aria-label="Previous"
+      >
+        ◀
+      </button>
+      <div className="text-center ">
+        <h2 className="text-2xl">{projects[currentIndex].title}</h2>
+        <p>{projects[currentIndex].description}</p>
       </div>
       <button
-        onClick={handlePrev}
-        className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-[rgb(var(--main-orange))] rounded-full text-[rgb(var(--clean-white))] hover:bg-[rgb(var(--main-orange-dark))]"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
+        className="absolute right-[5vw] z-103"
         onClick={handleNext}
-        className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-[rgb(var(--main-orange))] rounded-full text-[rgb(var(--clean-white))] hover:bg-[rgb(var(--main-orange-dark))]"
+        aria-label="Next"
       >
-        <ChevronRight size={24} />
+        ▶
       </button>
     </div>
   );
-}
+};
 
-function SimpleCard({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="bg-[rgb(var(--clean-white))] p-6 rounded-md shadow-md text-center text-[rgb(var(--main-black))]">
-      <h3 className="text-2xl font-bold text-[rgb(var(--main-orange))]">
-        {title}
-      </h3>
-      <p className="mt-2 text-lg">{description}</p>
-    </div>
-  );
-}
+export default ProjectCarousel;
