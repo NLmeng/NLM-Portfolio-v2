@@ -44,21 +44,21 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
   return (
     <div
       {...handlers}
-      className="relative h-full w-full flex items-center justify-center overflow-hidden"
+      className="relative h-full w-full flex items-center justify-center overflow-hidden mt-5"
     >
       <button
-        className="absolute left-4 z-10"
+        className="absolute left-[5vw] z-103 "
         onClick={handlePrev}
         aria-label="Previous"
       >
         ◀
       </button>
-      <div className="text-center">
+      <div className="text-center ">
         <h2 className="text-2xl">{projects[currentIndex].title}</h2>
         <p>{projects[currentIndex].description}</p>
       </div>
       <button
-        className="absolute right-4 z-10"
+        className="absolute right-[5vw] z-103"
         onClick={handleNext}
         aria-label="Next"
       >

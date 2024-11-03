@@ -4,15 +4,29 @@ import HorizontalAccordionSocials from "@/components/Accordion";
 import ProjectCarousel from "@/components/Carousel";
 import CircularBorder from "@/components/Circle";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
-import { useState } from "react";
+import { useCurrentSection } from "@/hooks/useCurrentSection";
+import { useEffect, useState } from "react";
 
 // TODO: pull up and refactor components related to carousels and its borders
 export default function Home() {
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
+  const currentSection = useCurrentSection();
+  const [isCarouselVisible, setIsCarouselVisible] = useState(false);
+
+  useEffect(() => {
+    if (currentSection === "PROJECTS") {
+      const timer = setTimeout(() => {
+        setIsCarouselVisible(true);
+      }, (1000 / 1.75) * delayIncrement * numDots);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentSection]);
 
   const numDots = 84; // should always match numDots in CircularBorder (TODO: pull up all instances)
   const anglePerDot = 360 / numDots; // degree/dots
+  const delayIncrement = 0.1; // seconds/dots
 
   const handleNavigationClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -95,7 +109,11 @@ export default function Home() {
               rotationAngle={rotationAngleInner}
             />
           </div>
-          <div className="absolute top-[10vh] h-[40vh] w-[65vw] z-103 bg-white opacity-50">
+          <div
+            className={`absolute top-[10vh] h-[40vh] w-[65vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
+              isCarouselVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <ProjectCarousel onRotate={handleRotate} />
           </div>
         </section>

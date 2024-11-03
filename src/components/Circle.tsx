@@ -95,6 +95,7 @@ const CircularBorder: React.FC<CircularBorderProps> = ({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     hasAnimationStarted,
     color,
@@ -138,6 +139,7 @@ const CircularBorder: React.FC<CircularBorderProps> = ({
 
       dot.style.transform = `translate(${x}px, ${y}px)`;
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rotationAngle, hasAnimationStarted]);
 
   return <div ref={containerRef} className="h-full w-full"></div>;
