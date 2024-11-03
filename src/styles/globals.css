@@ -62,6 +62,24 @@
     }
   }
 
+  @keyframes outerRotate {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: -420.48;
+    }
+  }
+
+  @keyframes innerRotate {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: 364.6;
+    }
+  }
+
   .animate-fadeIn {
     animation: fadeIn 1s forwards;
     animation-fill-mode: both;

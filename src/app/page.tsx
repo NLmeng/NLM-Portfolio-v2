@@ -12,10 +12,13 @@ export default function Home() {
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
   const currentSection = useCurrentSection();
+  const [startCountdownForCarousel, setStartCountdownForCarousel] =
+    useState(false);
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
 
   useEffect(() => {
     if (currentSection === "PROJECTS") {
+      setStartCountdownForCarousel(true);
       const timer = setTimeout(() => {
         setIsCarouselVisible(true);
       }, (1000 / 1.75) * delayIncrement * numDots);
@@ -23,6 +26,16 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [currentSection]);
+
+  useEffect(() => {
+    if (startCountdownForCarousel) {
+      const timer = setTimeout(() => {
+        setIsCarouselVisible(true);
+      }, (1000 / 1.75) * delayIncrement * numDots);
+
+      return () => clearTimeout(timer);
+    }
+  }, [startCountdownForCarousel]);
 
   const numDots = 84; // should always match numDots in CircularBorder (TODO: pull up all instances)
   const anglePerDot = 360 / numDots; // degree/dots
