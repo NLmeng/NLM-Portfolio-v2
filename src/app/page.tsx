@@ -1,6 +1,7 @@
 "use client";
 
 import HorizontalAccordionSocials from "@/components/Accordion";
+import { ButtonA, ThemeToggleButton } from "@/components/Button";
 import ProjectCarousel from "@/components/Carousel";
 import CircularBorder from "@/components/Circle";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
@@ -15,6 +16,7 @@ export default function Home() {
   const [startCountdownForCarousel, setStartCountdownForCarousel] =
     useState(false);
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
+  const [showDownButton, setShowDownButton] = useState(true);
 
   useEffect(() => {
     if (currentSection === "PROJECTS") {
@@ -37,9 +39,17 @@ export default function Home() {
     }
   }, [startCountdownForCarousel]);
 
-  const numDots = 84; // should always match numDots in CircularBorder (TODO: pull up all instances)
-  const anglePerDot = 360 / numDots; // degree/dots
-  const delayIncrement = 0.1; // seconds/dots
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowDownButton(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const numDots = 84; // Should match numDots in CircularBorder
+  const anglePerDot = 360 / numDots; // Degrees per dot
+  const delayIncrement = 0.1; // Seconds per dot
 
   const handleNavigationClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -69,6 +79,9 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen bg-[rgb(var(--main-black))] text-[rgb(var(--clean-white))]">
       <HorizontalAccordionSocials />
+      <div className="fixed top-16 left-4">
+        <ThemeToggleButton />
+      </div>
       <LeftNavigator onNavigate={handleNavigationClick} />
       <OvalNavigator />
       <main className="w-full ml-20 flex justify-center items-center flex-col">
@@ -131,6 +144,16 @@ export default function Home() {
           </div>
         </section>
       </main>
+      {showDownButton && (
+        <ButtonA
+          direction="down"
+          onClick={() => {
+            handleNavigationClick("projects");
+          }}
+          position="fixed"
+          className="left-1/2 bottom-4 transform -translate-x-1/2 animate-bounce"
+        />
+      )}
     </div>
   );
 }
