@@ -1,5 +1,3 @@
-// Carousel.tsx
-
 "use client";
 
 import ButtonA from "@/components/Button";
@@ -49,14 +47,22 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
       {...handlers}
       className="relative h-full w-full flex items-center justify-center overflow-hidden mt-5"
     >
-      <ButtonA direction="left" onClick={handlePrev} />
+      <ButtonA
+        direction="left"
+        onClick={handlePrev}
+        className="left-[5vw] top-1/2 transform -translate-y-1/2"
+      />
 
-      <div className="text-center ">
+      <div className="text-center">
         <h2 className="text-2xl">{projects[currentIndex].title}</h2>
         <p>{projects[currentIndex].description}</p>
       </div>
 
-      <ButtonA direction="right" onClick={handleNext} />
+      <ButtonA
+        direction="right"
+        onClick={handleNext}
+        className="right-[5vw] top-1/2 transform -translate-y-1/2"
+      />
     </div>
   );
 };
