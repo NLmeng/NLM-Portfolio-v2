@@ -1,5 +1,8 @@
+// Carousel.tsx
+
 "use client";
 
+import ButtonA from "@/components/Button";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
@@ -46,24 +49,14 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
       {...handlers}
       className="relative h-full w-full flex items-center justify-center overflow-hidden mt-5"
     >
-      <button
-        className="absolute left-[5vw] z-103 "
-        onClick={handlePrev}
-        aria-label="Previous"
-      >
-        ◀
-      </button>
+      <ButtonA direction="left" onClick={handlePrev} />
+
       <div className="text-center ">
         <h2 className="text-2xl">{projects[currentIndex].title}</h2>
         <p>{projects[currentIndex].description}</p>
       </div>
-      <button
-        className="absolute right-[5vw] z-103"
-        onClick={handleNext}
-        aria-label="Next"
-      >
-        ▶
-      </button>
+
+      <ButtonA direction="right" onClick={handleNext} />
     </div>
   );
 };
