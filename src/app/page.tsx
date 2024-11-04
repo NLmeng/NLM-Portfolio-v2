@@ -1,7 +1,7 @@
 "use client";
 
 import HorizontalAccordionSocials from "@/components/Accordion";
-import ButtonA from "@/components/Button";
+import { ButtonA, ThemeToggleButton } from "@/components/Button";
 import ProjectCarousel from "@/components/Carousel";
 import CircularBorder from "@/components/Circle";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
@@ -79,6 +79,9 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen bg-[rgb(var(--main-black))] text-[rgb(var(--clean-white))]">
       <HorizontalAccordionSocials />
+      <div className="fixed top-16 left-4">
+        <ThemeToggleButton />
+      </div>
       <LeftNavigator onNavigate={handleNavigationClick} />
       <OvalNavigator />
       <main className="w-full ml-20 flex justify-center items-center flex-col">

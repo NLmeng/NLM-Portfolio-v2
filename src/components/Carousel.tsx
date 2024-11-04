@@ -1,6 +1,6 @@
 "use client";
 
-import ButtonA from "@/components/Button";
+import { ButtonA } from "@/components/Button";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 

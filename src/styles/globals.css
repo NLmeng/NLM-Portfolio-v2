@@ -10,6 +10,7 @@
   --background-end-rgb: 255, 255, 255;
   --main-black: 35, 36, 38;
   --main-purple: 202, 174, 241;
+  --main-purple-dark: 204, 153, 255;
   --main-red: 246, 87, 81;
   --main-orange: 253, 143, 93;
   --main-orange-dark: 228, 128, 83;
@@ -96,6 +97,16 @@ body {
     rgb(var(--background-start-rgb));
   font-family: var(--font-inter);
   cursor: none;
+}
+
+body.light-mode {
+  --button-bg-color: rgb(var(--main-orange));
+  --button-hover-bg-color: rgb(var(--main-orange-dark));
+}
+
+body.dark-mode {
+  --button-bg-color: rgb(var(--main-purple));
+  --button-hover-bg-color: rgb(var(--main-purple-dark));
 }
 
 .cursor {
