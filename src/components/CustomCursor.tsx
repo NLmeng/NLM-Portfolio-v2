@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 
-const CustomCursor = () => {
+export const CustomCursor = () => {
   useEffect(() => {
     const cursor = document.createElement("div");
     cursor.classList.add("cursor");
@@ -41,5 +41,3 @@ const CustomCursor = () => {
 
   return null;
 };
-
-export default CustomCursor;

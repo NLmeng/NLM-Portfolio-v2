@@ -3,7 +3,7 @@
 import { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 
-const HorizontalAccordionSocials: React.FC = () => {
+export const HorizontalAccordionSocials: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
@@ -62,5 +62,3 @@ const HorizontalAccordionSocials: React.FC = () => {
     </div>
   );
 };
-
-export default HorizontalAccordionSocials;

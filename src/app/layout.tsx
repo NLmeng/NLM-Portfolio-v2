@@ -1,4 +1,4 @@
-import CustomCursor from "@/components/CustomCursor";
+import { CustomCursor } from "@/components";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";

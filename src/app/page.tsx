@@ -1,14 +1,15 @@
 "use client";
 
-import HorizontalAccordionSocials from "@/components/Accordion";
+import {
+  CircularBorder,
+  HorizontalAccordionSocials,
+  ProjectCarousel,
+} from "@/components";
 import { ButtonA, ThemeToggleButton } from "@/components/Button";
-import ProjectCarousel from "@/components/Carousel";
-import CircularBorder from "@/components/Circle";
 import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
 import { useEffect, useState } from "react";
 
-// TODO: pull up and refactor components related to carousels and its borders
 export default function Home() {
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);

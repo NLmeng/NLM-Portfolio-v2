@@ -20,7 +20,7 @@ interface ProjectCarouselProps {
   onRotate: (direction: "left" | "right") => void;
 }
 
-const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
+export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -66,5 +66,3 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
     </div>
   );
 };
-
-export default ProjectCarousel;

@@ -13,7 +13,7 @@ interface CircularBorderProps {
   rotationAngle: number;
 }
 
-const CircularBorder: React.FC<CircularBorderProps> = ({
+export const CircularBorder: React.FC<CircularBorderProps> = ({
   color = "rgb(var(--main-orange))",
   direction = "clockwise",
   numDots = 84,
@@ -95,7 +95,7 @@ const CircularBorder: React.FC<CircularBorderProps> = ({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     hasAnimationStarted,
     color,
@@ -139,10 +139,8 @@ const CircularBorder: React.FC<CircularBorderProps> = ({
 
       dot.style.transform = `translate(${x}px, ${y}px)`;
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rotationAngle, hasAnimationStarted]);
 
-  return <div ref={containerRef} className="h-full w-full"></div>;
+  return <div ref={containerRef} className="h-full w-full" id={id}></div>;
 };
-
-export default CircularBorder;
