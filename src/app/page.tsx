@@ -9,12 +9,13 @@ import {
   ProjectCarousel,
   ThemeToggleButton,
 } from "@/components";
-import { CIRCULAR_PROPS, HOME_PROPS } from "@/constants";
+import { CIRCULAR_PROPS, HOME_PROPS, TEXT_SIZE } from "@/constants";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const { NUM_DOTS, DELAY_INCREMENT, ANGLE_PER_DOT } = CIRCULAR_PROPS;
+  const { FULL_NAME, PERSONAL_DESCRIPTIONS, EXPERIENCE } = HOME_PROPS;
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
   const currentSection = useCurrentSection();
@@ -90,39 +91,41 @@ export default function Home() {
       <LeftNavigator onNavigate={handleNavigationClick} />
       <OvalNavigator />
       {/* */}
-      <main className="w-full ml-20 flex justify-center items-center flex-col">
+      <main className="w-full ml-20 mr-20 flex justify-center items-center flex-col">
         <section
           id="about"
           className="h-screen flex items-center justify-center"
         >
           <div className="text-center">
-            <div className="text-[rgb(var(--color-orange))] text-4xl sm:text-5xl">
-              {HOME_PROPS.FULL_NAME}
+            <div
+              className={`text-[rgb(var(--color-orange))] text-4xl md:text-5xl ${TEXT_SIZE.MAIN_HEADER}`}
+            >
+              {FULL_NAME}
             </div>
-            <div className="mt-4 text-xs sm:text-base">
-              {HOME_PROPS.PERSONAL_DESCRIPTIONS}
+            <div className={`mt-4 text-xs md:text-sm ${TEXT_SIZE.MAIN_BODY}`}>
+              {PERSONAL_DESCRIPTIONS}
             </div>
           </div>
         </section>
 
         <section
           id="experience"
-          className="min-h-fit flex flex-col items-center justify-center space-y-4 text-center pb-12"
+          className={`min-h-fit flex flex-col items-center justify-center space-y-4 text-center ${TEXT_SIZE.BODY} pb-12`}
         >
-          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
-            {HOME_PROPS.EXPERIENCE.EXP1}
+          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
+            {EXPERIENCE.EXP1}
           </div>
-          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
-            {HOME_PROPS.EXPERIENCE.EXP2}
+          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
+            {EXPERIENCE.EXP2}
           </div>
-          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
-            {HOME_PROPS.EXPERIENCE.EXP3}
+          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
+            {EXPERIENCE.EXP3}
           </div>
         </section>
 
         <section
           id="projects"
-          className="z-100 relative h-[50vh] flex flex-col justify-end items-center"
+          className={`z-100 relative h-[50vh] flex flex-col justify-end items-center text-center ${TEXT_SIZE.BODY}`}
         >
           <div className="absolute top-0 h-[50vh] w-[80vw] z-101 overflow-hidden">
             <CircularBorder
@@ -142,7 +145,7 @@ export default function Home() {
             />
           </div>
           <div
-            className={`absolute top-[10vh] h-[40vh] w-[65vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-[10vh] h-[40vh] w-[60vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
               isCarouselVisible ? "opacity-100" : "opacity-0"
             }`}
           >

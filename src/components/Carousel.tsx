@@ -46,7 +46,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       />
 
       <div className="text-center">
-        <h2 className="text-2xl">{projects[currentIndex].title}</h2>
+        <header>{projects[currentIndex].title}</header>
         <p>{projects[currentIndex].description}</p>
       </div>
 
