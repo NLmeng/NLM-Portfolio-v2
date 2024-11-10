@@ -16,22 +16,23 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   const isActive = currentSection === section;
 
   return (
-    <li
-      className={`flex items-center cursor-pointer ${
-        isActive
-          ? "font-bold text-[rgb(var(--color-red))]"
-          : "text-[rgb(var(--color-orange))]"
-      }`}
-      onClick={onClick}
-    >
-      <span
-        className={`block h-0.5 ${
+    <div className="group cursor-pointer flex items-center" onClick={onClick}>
+      <li
+        className={`flex items-center ${
           isActive
-            ? "bg-[rgb(var(--color-red))] w-16"
-            : "bg-[rgb(var(--color-orange))] w-8"
-        } mr-4 transition-all duration-300`}
-      ></span>
-      {section}
-    </li>
+            ? "font-bold text-[rgb(var(--color-red))]"
+            : "text-[rgb(var(--color-orange))] group-hover:text-[var(--button-hover-bg-color)]"
+        }`}
+      >
+        <span
+          className={`block h-0.5 ${
+            isActive
+              ? "bg-[rgb(var(--color-red))] md:w-12 w-8"
+              : "bg-[rgb(var(--color-orange))] md:w-8 w-4 group-hover:bg-[var(--button-hover-bg-color)]"
+          } mr-[1.5px] transition-all duration-300`}
+        />
+        {section}
+      </li>
+    </div>
   );
 };

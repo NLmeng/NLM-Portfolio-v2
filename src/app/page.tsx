@@ -23,6 +23,15 @@ export default function Home() {
     useState(false);
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [showDownButton, setShowDownButton] = useState(true);
+  const [isNavExpanded, setIsNavExpanded] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsNavExpanded(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (currentSection === "PROJECTS") {
@@ -55,6 +64,10 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const toggleNavExpansion = () => {
+    setIsNavExpanded((prev) => !prev);
+  };
+
   const handleNavigationClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -82,16 +95,26 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
-      {/* move to header/footer on smaller screen */}
+      {/* move to header/footer on mobile */}
       <HorizontalAccordionSocials />
       <div className="fixed top-16 left-4">
         <ThemeToggleButton />
       </div>
-      {/* remove on smaller screen */}
-      <LeftNavigator onNavigate={handleNavigationClick} />
-      <OvalNavigator />
+      {/* TODO: remove on mobile*/}
+      <LeftNavigator
+        onNavigate={handleNavigationClick}
+        isExpanded={isNavExpanded}
+      />
+      <OvalNavigator
+        isExpanded={isNavExpanded}
+        toggleExpansion={toggleNavExpansion}
+      />
       {/* */}
-      <main className="w-full ml-20 mr-20 flex justify-center items-center flex-col">
+      <main
+        className={`transition-all duration-500 ease-in-out w-full mr-20 flex justify-center items-center flex-col ${
+          isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] ml-[25%]" : "ml-20"
+        }`}
+      >
         <section
           id="about"
           className="h-screen flex items-center justify-center"

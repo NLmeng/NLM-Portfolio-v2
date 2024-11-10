@@ -7,14 +7,23 @@ import React from "react";
 
 interface LeftNavigatorProps {
   onNavigate: (sectionId: string) => void;
+  isExpanded: boolean;
 }
 
-export const LeftNavigator: React.FC<LeftNavigatorProps> = ({ onNavigate }) => {
-  const currentSection = useCurrentSection();
+export const LeftNavigator: React.FC<LeftNavigatorProps> = ({
+  onNavigate,
+  isExpanded,
+}) => {
   const sections: string[] = ["ABOUT", "EXPERIENCE", "PROJECTS"];
-
+  const currentSection = useCurrentSection();
   return (
-    <div className="md:ml-6 ml-2 fixed md:left-6 left-2 top-1/2 transform -translate-y-1/2 z-40 w-48 flex flex-col items-center">
+    <div
+      className={`fixed top-1/2 transform -translate-y-1/2 z-40 w-48 flex flex-col items-center transition-all duration-500 ease-in-out ${
+        isExpanded
+          ? "opacity-100 md:ml-4 ml-1 fixed md:left-4 left-1"
+          : "opacity-0 left-[-100px]"
+      }`}
+    >
       <ul className={`space-y-8 ${TEXT_SIZE.BODY}`}>
         {sections.map((section) => (
           <NavigationItem
