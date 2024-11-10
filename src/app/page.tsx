@@ -81,12 +81,15 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
+      {/* move to header/footer on smaller screen */}
       <HorizontalAccordionSocials />
       <div className="fixed top-16 left-4">
         <ThemeToggleButton />
       </div>
+      {/* remove on smaller screen */}
       <LeftNavigator onNavigate={handleNavigationClick} />
       <OvalNavigator />
+      {/* */}
       <main className="w-full ml-20 flex justify-center items-center flex-col">
         <section
           id="about"
