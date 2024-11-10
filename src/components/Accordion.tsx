@@ -13,7 +13,7 @@ export const HorizontalAccordionSocials: React.FC = () => {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <span
-          className={`text-[rgb(var(--clean-white))] text-xl transition-transform duration-300`}
+          className={`text-[rgb(var(--clean-white))] transition-transform duration-300`}
         >
           {isExpanded ? (
             <Icon.ChevronLeft size={15} />
