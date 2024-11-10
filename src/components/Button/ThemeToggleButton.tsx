@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { IconButton } from "@/components/Button";
+import { IconButton } from "@/components";
 import { MoonFill, SunFill } from "react-bootstrap-icons";
 
 export const ThemeToggleButton: React.FC = () => {

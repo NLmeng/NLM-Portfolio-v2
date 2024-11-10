@@ -9,7 +9,7 @@ export const HorizontalAccordionSocials: React.FC = () => {
   return (
     <div className="fixed top-4 left-4 flex items-center">
       <button
-        className="bg-[rgb(var(--main-orange))] z-50 py-2 px-3 brdr0_5 flex items-center justify-center"
+        className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] bg-[var(--button-bg-color)] z-50 py-2 px-3 brdr0_5 flex items-center justify-center"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <span
@@ -31,13 +31,13 @@ export const HorizontalAccordionSocials: React.FC = () => {
         }}
       >
         <div
-          className={`bg-[rgb(var(--clean-white))] rounded-r-md h-full flex items-center px-3 border border-[rgb(var(--main-orange-dark))]`}
+          className={`bg-[rgb(var(--clean-white))] rounded-r-md h-full flex items-center px-3 border border-[var(--button-bg-color)]`}
         >
           <a
             href="https://github.com/NLmeng"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[rgb(var(--main-orange))] hover:text-[rgb(var(--main-purple))] ml-2 mr-1 my-0.5"
+            className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)]  ml-2 mr-1 my-0.5"
           >
             <Icon.Github size={20} />
           </a>
@@ -46,14 +46,14 @@ export const HorizontalAccordionSocials: React.FC = () => {
             href="https://www.linkedin.com/in/lymengnaret/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[rgb(var(--main-orange))] hover:text-[rgb(var(--main-purple))] ml-1 mr-1 my-0.5"
+            className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)]  ml-1 mr-1 my-0.5"
           >
             <Icon.Linkedin size={20} />
           </a>
 
           <a
             href="mailto:lymengnaret@yahoo.com"
-            className="text-[rgb(var(--main-orange))] hover:text-[rgb(var(--main-purple))] ml-1 mr-2 my-0.5"
+            className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)]  ml-1 mr-2 my-0.5"
           >
             <Icon.Envelope size={20} />
           </a>

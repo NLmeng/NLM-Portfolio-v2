@@ -1,6 +1,6 @@
 "use client";
 
-import { NavigationItem } from "@/components/Navigator";
+import { NavigationItem } from "@/components";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
 import React from "react";
 

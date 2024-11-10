@@ -1,8 +1,7 @@
 "use client";
 
+import { IconButton } from "@/components";
 import React from "react";
-
-import { IconButton } from "@/components/Button";
 import {
   ChevronDown,
   ChevronLeft,

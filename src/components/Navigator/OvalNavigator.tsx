@@ -66,7 +66,7 @@ export const OvalNavigator: React.FC = () => {
           rx="20"
           ry="100"
           fill="none"
-          stroke="rgb(var(--clean-white))"
+          stroke="var(--main-text-color)"
           strokeWidth="7"
           strokeDasharray={`0,${outerGap}`}
           strokeLinecap="round"
@@ -85,7 +85,7 @@ export const OvalNavigator: React.FC = () => {
           rx="10"
           ry="90"
           fill="none"
-          stroke="rgb(var(--main-orange))"
+          stroke="rgb(var(--color-orange))"
           strokeWidth="7"
           strokeDasharray={`0,${innerGap}`}
           strokeLinecap="round"

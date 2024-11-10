@@ -1,16 +1,20 @@
 "use client";
 
 import {
+  ButtonA,
   CircularBorder,
   HorizontalAccordionSocials,
+  LeftNavigator,
+  OvalNavigator,
   ProjectCarousel,
+  ThemeToggleButton,
 } from "@/components";
-import { ButtonA, ThemeToggleButton } from "@/components/Button";
-import { LeftNavigator, OvalNavigator } from "@/components/Navigator";
+import { CIRCULAR_PROPS, HOME_PROPS } from "@/constants";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { NUM_DOTS, DELAY_INCREMENT, ANGLE_PER_DOT } = CIRCULAR_PROPS;
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
   const currentSection = useCurrentSection();
@@ -24,20 +28,22 @@ export default function Home() {
       setStartCountdownForCarousel(true);
       const timer = setTimeout(() => {
         setIsCarouselVisible(true);
-      }, (1000 / 1.75) * delayIncrement * numDots);
+      }, (1000 / 1.75) * DELAY_INCREMENT * NUM_DOTS);
 
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
   useEffect(() => {
     if (startCountdownForCarousel) {
       const timer = setTimeout(() => {
         setIsCarouselVisible(true);
-      }, (1000 / 1.75) * delayIncrement * numDots);
+      }, (1000 / 1.75) * DELAY_INCREMENT * NUM_DOTS);
 
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startCountdownForCarousel]);
 
   useEffect(() => {
@@ -47,10 +53,6 @@ export default function Home() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const numDots = 84; // Should match numDots in CircularBorder
-  const anglePerDot = 360 / numDots; // Degrees per dot
-  const delayIncrement = 0.1; // Seconds per dot
 
   const handleNavigationClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -69,16 +71,16 @@ export default function Home() {
 
   const handleRotate = (direction: "left" | "right") => {
     if (direction === "right") {
-      setRotationAngleOuter((prev) => prev + anglePerDot);
-      setRotationAngleInner((prev) => prev - anglePerDot);
+      setRotationAngleOuter((prev) => prev + ANGLE_PER_DOT);
+      setRotationAngleInner((prev) => prev - ANGLE_PER_DOT);
     } else {
-      setRotationAngleOuter((prev) => prev - anglePerDot);
-      setRotationAngleInner((prev) => prev + anglePerDot);
+      setRotationAngleOuter((prev) => prev - ANGLE_PER_DOT);
+      setRotationAngleInner((prev) => prev + ANGLE_PER_DOT);
     }
   };
 
   return (
-    <div className="relative flex min-h-screen bg-[rgb(var(--main-black))] text-[rgb(var(--clean-white))]">
+    <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
       <HorizontalAccordionSocials />
       <div className="fixed top-16 left-4">
         <ThemeToggleButton />
@@ -91,11 +93,11 @@ export default function Home() {
           className="h-screen flex items-center justify-center"
         >
           <div className="text-center">
-            <div className="text-[rgb(var(--main-orange))] text-6xl">
-              Lymeng Naret
+            <div className="text-[rgb(var(--color-orange))] text-4xl sm:text-5xl">
+              {HOME_PROPS.FULL_NAME}
             </div>
-            <div className="text-[rgb(var(--clean-white))] mt-4">
-              SOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER
+            <div className="mt-4 text-xs sm:text-base">
+              {HOME_PROPS.PERSONAL_DESCRIPTIONS}
             </div>
           </div>
         </section>
@@ -104,14 +106,14 @@ export default function Home() {
           id="experience"
           className="min-h-fit flex flex-col items-center justify-center space-y-4 text-center pb-12"
         >
-          <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
-            -Present PLACE HOLDER CARD 1
+          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
+            {HOME_PROPS.EXPERIENCE.EXP1}
           </div>
-          <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
-            -2023 PLACE HOLDER CARD 2
+          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
+            {HOME_PROPS.EXPERIENCE.EXP2}
           </div>
-          <div className="border border-[rgb(var(--main-purple))] p-4 h-[12vh]">
-            -2022 PLACE HOLDER CARD 3
+          <div className="border border-theme p-4 h-[12vh] sm:h-[10vh] xs:h-[8vh]">
+            {HOME_PROPS.EXPERIENCE.EXP3}
           </div>
         </section>
 
@@ -123,8 +125,8 @@ export default function Home() {
             <CircularBorder
               id="outer"
               direction="clockwise"
-              numDots={numDots}
-              color="rgb(var(--clean-white))"
+              numDots={NUM_DOTS}
+              color="var(--main-text-color)"
               rotationAngle={rotationAngleOuter}
             />
           </div>
@@ -132,7 +134,7 @@ export default function Home() {
             <CircularBorder
               id="inner"
               direction="counter"
-              numDots={numDots}
+              numDots={NUM_DOTS}
               rotationAngle={rotationAngleInner}
             />
           </div>

@@ -14,7 +14,7 @@ interface CircularBorderProps {
 }
 
 export const CircularBorder: React.FC<CircularBorderProps> = ({
-  color = "rgb(var(--main-orange))",
+  color = "rgb(var(--color-orange))",
   direction = "clockwise",
   numDots = 84,
   delayIncrement = 0.1,
