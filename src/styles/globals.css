@@ -3,19 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
   --font-inter: "Inter", sans-serif;
   --font-roboto-mono: "Roboto Mono", monospace;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --main-black: 35, 36, 38;
-  --main-purple: 202, 174, 241;
-  --main-purple-dark: 204, 153, 255;
-  --main-red: 246, 87, 81;
-  --main-orange: 253, 143, 93;
-  --main-orange-dark: 228, 128, 83;
-  --main-orange-darker: 204, 114, 74;
-  --clean-white: 255, 255, 255;
+
+  --color-black: 35, 36, 38;
+  --color-white: 250, 250, 250;
+  --color-orange: 253, 143, 93;
+  --color-orange-dark: 228, 128, 83;
+  --color-orange-darker: 204, 114, 74;
+  --color-purple: 202, 174, 241;
+  --color-purple-dark: 204, 153, 255;
+  --color-red: 246, 87, 81;
+
   scroll-behavior: smooth;
 }
 
@@ -25,6 +24,44 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+body.light-mode {
+  --main-bg-color: rgb(var(--color-white));
+  --main-text-color: rgb(var(--color-black));
+  --button-bg-color: rgb(var(--color-orange));
+  --button-hover-bg-color: rgb(var(--color-orange-dark));
+  --border-color: rgb(var(--color-orange));
+}
+
+body.dark-mode {
+  --main-bg-color: rgb(var(--color-black));
+  --main-text-color: rgb(var(--color-white));
+  /* --button-bg-color: rgb(var(--color-purple)); */
+  /* NOTE: keeping buttons always orange for now since some components colors are also always orange */
+  --button-bg-color: rgb(var(--color-orange));
+  --button-hover-bg-color: rgb(var(--color-purple-dark));
+  --border-color: rgb(var(--color-orange));
+}
+
+body {
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  font-family: var(--font-inter);
+  cursor: none;
+}
+
+button {
+  background-color: var(--button-bg-color);
+  color: rgb(var(--color-white));
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+.border-theme {
+  border-color: var(--border-color);
 }
 
 @layer utilities {
@@ -87,38 +124,16 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-family: var(--font-inter);
-  cursor: none;
-}
-
-body.light-mode {
-  --button-bg-color: rgb(var(--main-orange));
-  --button-hover-bg-color: rgb(var(--main-orange-dark));
-}
-
-body.dark-mode {
-  --button-bg-color: rgb(var(--main-purple));
-  --button-hover-bg-color: rgb(var(--main-purple-dark));
-}
-
 .cursor {
   position: fixed;
   width: 10px;
   height: 10px;
-  background-color: rgb(var(--main-orange));
+  background-color: rgb(var(--color-red));
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transition: transform 0.15s ease;
-  box-shadow: 0 0 10px rgba(var(--main-orange), 0.8);
+  box-shadow: 0 0 10px rgba(var(--color-red), 0.8);
 }
 
 .cursor.click {
@@ -129,7 +144,7 @@ body.dark-mode {
   position: fixed;
   width: 4px;
   height: 4px;
-  background-color: rgba(var(--main-orange), 0.6);
+  background-color: rgba(var(--color-red), 0.6);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;

@@ -1,26 +1,18 @@
 "use client";
 
-import { ButtonA } from "@/components/Button";
+import { ButtonA } from "@/components";
+import { HOME_PROPS } from "@/constants";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-}
-
-const projects: Project[] = [
-  { id: 0, title: "Project 1", description: "Description of Project 1" },
-  { id: 1, title: "Project 2", description: "Description of Project 2" },
-  { id: 2, title: "Project 3", description: "Description of Project 3" },
-];
 
 interface ProjectCarouselProps {
   onRotate: (direction: "left" | "right") => void;
 }
 
-const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
+export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
+  onRotate,
+}) => {
+  const projects = HOME_PROPS.PROJECT;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -66,5 +58,3 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ onRotate }) => {
     </div>
   );
 };
-
-export default ProjectCarousel;

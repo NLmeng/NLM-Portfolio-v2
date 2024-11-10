@@ -1,12 +1,7 @@
-import CustomCursor from "@/components/CustomCursor";
+import { CustomCursor } from "@/components";
+import { metadata } from "@/constants";
 import "@/styles/globals.css";
-import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
-
-export const metadata: Metadata = {
-  title: "Lymeng Naret",
-  description: "Lymeng Naret is a software engineer.", //TODO: add description
-};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +14,7 @@ const roboto_mono = Roboto_Mono({
   display: "swap",
   variable: "--font-roboto-mono",
 });
-
+// TODO: check if conflict with style.css
 export default function RootLayout({
   children,
 }: {
@@ -27,6 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{String(metadata.title) ?? ""}</title>
+      </head>
       <body>
         <CustomCursor />
         {children}
