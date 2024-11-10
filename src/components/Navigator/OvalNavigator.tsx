@@ -2,7 +2,16 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-export const OvalNavigator: React.FC = () => {
+interface OvalNavigatorProps {
+  isExpanded: boolean;
+  toggleExpansion: () => void;
+}
+
+// TODO: add swipe for scrolling
+export const OvalNavigator: React.FC<OvalNavigatorProps> = ({
+  isExpanded,
+  toggleExpansion,
+}) => {
   const outerPerimeter = 420.48;
   const innerPerimeter = 364.6;
   const outerGap = 14.016;
@@ -11,6 +20,8 @@ export const OvalNavigator: React.FC = () => {
   const [isIdle, setIsIdle] = useState(true);
   const [outerDashOffset, setOuterDashOffset] = useState(0);
   const [innerDashOffset, setInnerDashOffset] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
   const lastScrollY = useRef(0);
   const idleTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -58,8 +69,29 @@ export const OvalNavigator: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed top-1/2 left-[-25px] transform -translate-y-1/2 z-[999]">
-      <svg width="50" height="200" viewBox="0 0 50 200">
+    <div
+      className={`fixed top-1/2 transform -translate-y-1/2 z-[999] transition-all duration-500 ease-in-out ${
+        isExpanded ? "left-0" : "left-[-25px]"
+      }`}
+      onClick={toggleExpansion}
+      style={{ cursor: "pointer" }}
+    >
+      <svg
+        width="50"
+        height="210"
+        viewBox="0 0 50 200"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {isHovered && (
+          <ellipse
+            cx="25"
+            cy="100"
+            rx="20"
+            ry="100"
+            fill="var(--hover-overlay-color)"
+          />
+        )}
         <ellipse
           cx="25"
           cy="100"

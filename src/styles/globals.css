@@ -15,6 +15,8 @@
   --color-purple-dark: 204, 153, 255;
   --color-red: 246, 87, 81;
 
+  --hover-overlay-color: rgba(0, 0, 0, 0.1);
+
   scroll-behavior: smooth;
 }
 
@@ -31,6 +33,7 @@ body.light-mode {
   --main-text-color: rgb(var(--color-black));
   --button-bg-color: rgb(var(--color-orange));
   --button-hover-bg-color: rgb(var(--color-orange-dark));
+  --hover-overlay-color: rgba(var(--color-orange-dark), 0.25);
   --border-color: rgb(var(--color-orange));
 }
 
@@ -41,6 +44,7 @@ body.dark-mode {
   /* NOTE: keeping buttons always orange for now since some components colors are also always orange */
   --button-bg-color: rgb(var(--color-orange));
   --button-hover-bg-color: rgb(var(--color-purple-dark));
+  --hover-overlay-color: rgb(var(--color-purple-dark), 0.25);
   --border-color: rgb(var(--color-orange));
 }
 
