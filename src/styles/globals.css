@@ -29,6 +29,7 @@
 }
 
 body.light-mode {
+  --icon-glow-color: rgba(var(--color-red), 0.1);
   --main-bg-color: rgb(var(--color-white));
   --main-text-color: rgb(var(--color-black));
   --button-bg-color: rgb(var(--color-orange));
@@ -38,6 +39,7 @@ body.light-mode {
 }
 
 body.dark-mode {
+  --icon-glow-color: rgba(var(--color-white), 0.1);
   --main-bg-color: rgb(var(--color-black));
   --main-text-color: rgb(var(--color-white));
   /* --button-bg-color: rgb(var(--color-purple)); */
@@ -55,15 +57,6 @@ body {
   cursor: none;
 }
 
-button {
-  background-color: var(--button-bg-color);
-  color: rgb(var(--color-white));
-}
-
-button:hover {
-  background-color: var(--button-hover-bg-color);
-}
-
 .border-theme {
   border-color: var(--border-color);
 }
@@ -71,6 +64,19 @@ button:hover {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  @keyframes glowPulse {
+    0% {
+      box-shadow: 0 0 5px var(--icon-glow-color),
+        0 0 10px var(--icon-glow-color), 0 0 15px var(--icon-glow-color),
+        0 0 20px var(--icon-glow-color);
+    }
+    100% {
+      box-shadow: 0 0 10px var(--icon-glow-color),
+        0 0 20px var(--icon-glow-color), 0 0 30px var(--icon-glow-color),
+        0 0 40px var(--icon-glow-color);
+    }
   }
 
   @keyframes pulse {
@@ -125,6 +131,12 @@ button:hover {
   .animate-fadeIn {
     animation: fadeIn 1s forwards;
     animation-fill-mode: both;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 5px var(--icon-glow-color), 0 0 10px var(--icon-glow-color),
+      0 0 15px var(--icon-glow-color), 0 0 20px var(--icon-glow-color);
+    animation: glowPulse 2s infinite alternate;
   }
 }
 

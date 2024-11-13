@@ -3,11 +3,10 @@
 import {
   ButtonA,
   CircularBorder,
-  HorizontalAccordionSocials,
+  Header,
   LeftNavigator,
   OvalNavigator,
   ProjectCarousel,
-  ThemeToggleButton,
 } from "@/components";
 import { CIRCULAR_PROPS, HOME_PROPS, TEXT_SIZE } from "@/constants";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
@@ -95,11 +94,6 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
-      {/* move to header/footer on mobile */}
-      <HorizontalAccordionSocials />
-      <div className="fixed top-16 left-4">
-        <ThemeToggleButton />
-      </div>
       {/* TODO: remove on mobile*/}
       <LeftNavigator
         onNavigate={handleNavigationClick}
@@ -115,6 +109,8 @@ export default function Home() {
           isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] ml-[25%]" : "ml-20"
         }`}
       >
+        <Header />
+
         <section
           id="about"
           className="h-screen flex items-center justify-center"
