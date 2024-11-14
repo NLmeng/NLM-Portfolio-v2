@@ -18,11 +18,6 @@ export const HOME_PROPS = {
   FULL_NAME: "Lymeng Naret",
   PERSONAL_DESCRIPTIONS:
     "SOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER",
-  EXPERIENCE: {
-    EXP1: "Present PLACE HOLDER CARD 1\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER",
-    EXP2: "2023 PLACE HOLDER CARD 2\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER",
-    EXP3: "2022 PLACE HOLDER CARD 3\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER\nSOME DESCRIPTIONS HERE THAT WILL BE FILLED IN LATER",
-  },
   PROJECT: [
     {
       id: 0,
@@ -44,6 +39,38 @@ export const HOME_PROPS = {
     },
   ],
 };
+
+export const EXPERIENCE_DATA = [
+  {
+    year: "2019",
+    title: "Project Initiation",
+    description: "Started initial project development with new team members.",
+  },
+  {
+    year: "2020",
+    title: "Major Launch",
+    description:
+      "Launched the new version of the product, focusing on user experience.",
+  },
+  {
+    year: "2021",
+    title: "Expansion Phase",
+    description:
+      "Expanded the project to include additional features and integrations.",
+  },
+  {
+    year: "2022",
+    title: "Optimization",
+    description:
+      "Optimized performance based on user feedback and analytics data.",
+  },
+  {
+    year: "2023",
+    title: "Growth Strategy",
+    description:
+      "Implemented growth strategies, increasing user engagement by 30%.",
+  },
+];
 
 export const TEXT_SIZE = {
   MAIN_HEADER: "text-4xl md:text-5xl",

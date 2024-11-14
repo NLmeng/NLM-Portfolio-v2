@@ -7,7 +7,7 @@ import { Question } from "react-bootstrap-icons";
 export const Header: React.FC = () => {
   return (
     <header
-      className={`absolute top-0 left-0 w-full bg-transparent text-[12px] font-normal tracking-[-0.01em] my-1`}
+      className={`border-b-[0.1px] border-[var(--only-feel-color)] absolute top-0 left-0 w-full bg-transparent text-[12px] font-normal tracking-[-0.01em] my-1`}
     >
       <div className="flex justify-center">
         <nav className="flex space-x-8 ">

@@ -30,6 +30,7 @@
 
 body.light-mode {
   --icon-glow-color: rgba(var(--color-red), 0.1);
+  --only-feel-color: rgba(var(--color-black), 0.05);
   --main-bg-color: rgb(var(--color-white));
   --main-text-color: rgb(var(--color-black));
   --button-bg-color: rgb(var(--color-orange));
@@ -40,6 +41,7 @@ body.light-mode {
 
 body.dark-mode {
   --icon-glow-color: rgba(var(--color-white), 0.1);
+  --only-feel-color: rgba(var(--color-white), 0.05);
   --main-bg-color: rgb(var(--color-black));
   --main-text-color: rgb(var(--color-white));
   /* --button-bg-color: rgb(var(--color-purple)); */

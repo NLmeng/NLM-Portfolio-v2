@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 import { IconButton } from "@/components";
-import { Moon, SunFill } from "react-bootstrap-icons";
+import { Moon, Sun } from "react-bootstrap-icons";
 
 interface ThemeToggleButtonProps {
   size?: number;
@@ -36,7 +36,11 @@ export const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
     }
   }, [isDarkMode]);
 
-  const icon = isDarkMode ? <Moon size={size} /> : <SunFill size={size} />;
+  const icon = isDarkMode ? (
+    <Moon className="glow-effect" size={size} />
+  ) : (
+    <Sun className="glow-effect" size={size} />
+  );
 
   return (
     <IconButton
@@ -44,7 +48,7 @@ export const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
       icon={icon}
       position=""
       default={false}
-      className="glow-effect text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)]"
+      className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)]"
       ariaLabel="Toggle Dark Mode"
       title="Toggle Dark Mode"
       isAnimating={isAnimating}
