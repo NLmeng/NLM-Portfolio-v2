@@ -30,7 +30,7 @@ export default function Home() {
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [showDownButton, setShowDownButton] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(3);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -121,15 +121,15 @@ export default function Home() {
 
         <section
           id="about"
-          className="h-screen w-[100%] flex items-center justify-center"
+          className="h-screen flex items-center justify-center"
         >
           <div className="text-center">
             <div
-              className={`text-[rgb(var(--color-orange))] text-4xl md:text-5xl ${TEXT_SIZE.MAIN_HEADER}`}
+              className={`text-[rgb(var(--color-orange))] ${TEXT_SIZE.MAIN_HEADER}`}
             >
               {FULL_NAME}
             </div>
-            <div className={`mt-4 text-xs md:text-sm ${TEXT_SIZE.MAIN_BODY}`}>
+            <div className={`mt-4 ${TEXT_SIZE.MAIN_BODY}`}>
               {PERSONAL_DESCRIPTIONS}
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function Home() {
 
         <section
           id="experience"
-          className={`relative h-[75vh] w-[100%] flex flex-col items-center justify-center text-center ${TEXT_SIZE.BODY}`}
+          className={`relative h-[75vh] flex flex-col items-center justify-center text-center ${TEXT_SIZE.BODY}`}
         >
           <Timeline
             currentIndex={currentIndex}
