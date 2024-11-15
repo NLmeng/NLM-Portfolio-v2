@@ -26,7 +26,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   default: isDefault = true,
 }) => {
   const defaultClasses = isDefault
-    ? "text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] bg-[var(--button-bg-color)]"
+    ? "text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] bg-[var(--button-bg-color)] p-2 rounded-full z-103"
     : "";
 
   return (
@@ -34,7 +34,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
       onClick={onClick}
       aria-label={ariaLabel}
       title={title}
-      className={`${position} p-2 rounded-full ${defaultClasses} z-103 ${className}`}
+      className={`${position} ${defaultClasses} ${className}`}
     >
       <div className={`${isAnimating ? animationClassName : ""}`}>{icon}</div>
     </button>

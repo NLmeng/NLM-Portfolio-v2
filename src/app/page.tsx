@@ -7,14 +7,21 @@ import {
   LeftNavigator,
   OvalNavigator,
   ProjectCarousel,
+  Timeline,
+  TimelineController,
 } from "@/components";
-import { CIRCULAR_PROPS, HOME_PROPS, TEXT_SIZE } from "@/constants";
+import {
+  CIRCULAR_PROPS,
+  EXPERIENCE_DATA,
+  HOME_PROPS,
+  TEXT_SIZE,
+} from "@/constants";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const { NUM_DOTS, DELAY_INCREMENT, ANGLE_PER_DOT } = CIRCULAR_PROPS;
-  const { FULL_NAME, PERSONAL_DESCRIPTIONS, EXPERIENCE } = HOME_PROPS;
+  const { FULL_NAME, PERSONAL_DESCRIPTIONS } = HOME_PROPS;
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
   const currentSection = useCurrentSection();
@@ -23,6 +30,7 @@ export default function Home() {
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [showDownButton, setShowDownButton] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(3);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -91,7 +99,7 @@ export default function Home() {
       setRotationAngleInner((prev) => prev + ANGLE_PER_DOT);
     }
   };
-
+  // TODO: fix scrolls after finalize heights
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
       {/* TODO: remove on mobile*/}
@@ -117,11 +125,11 @@ export default function Home() {
         >
           <div className="text-center">
             <div
-              className={`text-[rgb(var(--color-orange))] text-4xl md:text-5xl ${TEXT_SIZE.MAIN_HEADER}`}
+              className={`text-[rgb(var(--color-orange))] ${TEXT_SIZE.MAIN_HEADER}`}
             >
               {FULL_NAME}
             </div>
-            <div className={`mt-4 text-xs md:text-sm ${TEXT_SIZE.MAIN_BODY}`}>
+            <div className={`mt-4 ${TEXT_SIZE.MAIN_BODY}`}>
               {PERSONAL_DESCRIPTIONS}
             </div>
           </div>
@@ -129,17 +137,17 @@ export default function Home() {
 
         <section
           id="experience"
-          className={`min-h-fit flex flex-col items-center justify-center space-y-4 text-center ${TEXT_SIZE.BODY} pb-12`}
+          className={`relative h-[75vh] flex flex-col items-center justify-center text-center ${TEXT_SIZE.BODY}`}
         >
-          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
-            {EXPERIENCE.EXP1}
-          </div>
-          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
-            {EXPERIENCE.EXP2}
-          </div>
-          <div className="border border-theme p-4 h-[12vh] md:h-[10vh]">
-            {EXPERIENCE.EXP3}
-          </div>
+          <Timeline
+            currentIndex={currentIndex}
+            experienceData={EXPERIENCE_DATA}
+          />
+          <TimelineController
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            experienceData={EXPERIENCE_DATA}
+          />
         </section>
 
         <section

@@ -26,6 +26,18 @@ const config: Config = {
       },
     },
   },
+  safelist: [
+    "text-4xl",
+    "md:text-5xl",
+    "text-sm",
+    "md:text-md",
+    "text-2xl",
+    "md:text-3xl",
+    "text-xs",
+    "md:text-sm",
+    "text-[10px]",
+    "md:text-[12px]",
+  ],
   plugins: [],
 };
 

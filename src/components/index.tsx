@@ -9,3 +9,5 @@ export { Header } from "./Header";
 export { LeftNavigator } from "./Navigator/LeftNavigator";
 export { NavigationItem } from "./Navigator/NavigationItem";
 export { OvalNavigator } from "./Navigator/OvalNavigator";
+export { Timeline } from "./Timeline/Timeline";
+export { TimelineController } from "./Timeline/TimelineController";
