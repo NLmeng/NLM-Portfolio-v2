@@ -18,7 +18,7 @@ export const Timeline: React.FC<TimelineProps> = ({
 }) => {
   return (
     <div className="my-[100px] h-[100%]">
-      <div className="w-full p-6 shadow-md">
+      <div className="w-full p-6 shadow-md whitespace-pre-line">
         <h2 className="font-semibold italic tracking-wide">
           {experienceData[currentIndex].year}
         </h2>
