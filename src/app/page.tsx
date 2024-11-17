@@ -152,9 +152,9 @@ export default function Home() {
 
         <section
           id="projects"
-          className={`z-100 relative h-[50vh] flex flex-col justify-end items-center text-center ${TEXT_SIZE.BODY}`}
+          className={`z-100 relative h-[65vh] flex flex-col justify-end items-center text-center ${TEXT_SIZE.BODY}`}
         >
-          <div className="absolute top-0 h-[50vh] w-[80vw] z-101 overflow-hidden">
+          <div className="absolute top-[15vh] h-[50vh] w-[80vw] z-101 overflow-hidden">
             <CircularBorder
               id="outer"
               direction="clockwise"
@@ -163,7 +163,7 @@ export default function Home() {
               rotationAngle={rotationAngleOuter}
             />
           </div>
-          <div className="absolute top-[5vh] h-[45vh] w-[75vw] z-102 overflow-hidden">
+          <div className="absolute top-[20vh] h-[45vh] w-[75vw] z-102 overflow-hidden">
             <CircularBorder
               id="inner"
               direction="counter"
@@ -172,7 +172,7 @@ export default function Home() {
             />
           </div>
           <div
-            className={`absolute top-[10vh] h-[40vh] w-[60vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-[25vh] h-[40vh] w-[60vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
               isCarouselVisible ? "opacity-100" : "opacity-0"
             }`}
           >

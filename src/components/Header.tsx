@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
             default={false}
             className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] p-2 rounded-full z-103"
             ariaLabel="Home Logo"
-            title="Home Logo"
+            title="Home"
             animationClassName="transition-transform duration-500 transform rotate-180"
           />
           <a
