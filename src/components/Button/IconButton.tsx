@@ -26,7 +26,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   default: isDefault = true,
 }) => {
   const defaultClasses = isDefault
-    ? "text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] bg-[var(--button-bg-color)] p-2 rounded-full z-103"
+    ? "text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] bg-[var(--button-bg-color)] p-2 rounded-full z-20"
     : "";
 
   return (

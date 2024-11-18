@@ -99,7 +99,7 @@ export default function Home() {
       setRotationAngleInner((prev) => prev + ANGLE_PER_DOT);
     }
   };
-  // TODO: fix scrolls after finalize heights
+
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
       {/* TODO: remove on mobile*/}
@@ -137,7 +137,7 @@ export default function Home() {
 
         <section
           id="experience"
-          className={`relative h-[75vh] flex flex-col items-center justify-center text-center ${TEXT_SIZE.BODY}`}
+          className={`relative h-[75vh] flex flex-col items-center justify-center ${TEXT_SIZE.BODY}`}
         >
           <Timeline
             currentIndex={currentIndex}
@@ -150,11 +150,23 @@ export default function Home() {
           />
         </section>
 
+        <div
+          className={`top-[20vh] relative z-20 overflow-hidden self-baseline ${TEXT_SIZE.BODY}`}
+        >
+          <a
+            href="/projects"
+            rel="noopener noreferrer"
+            className="underline after:content-['_↗'] text-[var(--main-text-color)] hover:text-[var(--button-hover-bg-color)] transition-colors duration-300"
+          >
+            See All Projects
+          </a>
+        </div>
+
         <section
           id="projects"
-          className={`z-100 relative h-[65vh] flex flex-col justify-end items-center text-center ${TEXT_SIZE.BODY}`}
+          className={`z-10 relative h-[65vh] flex flex-col justify-end items-center ${TEXT_SIZE.BODY}`}
         >
-          <div className="absolute top-[15vh] h-[50vh] w-[80vw] z-101 overflow-hidden">
+          <div className="absolute top-[15vh] h-[50vh] w-[80vw] z-10 overflow-hidden">
             <CircularBorder
               id="outer"
               direction="clockwise"
@@ -163,7 +175,7 @@ export default function Home() {
               rotationAngle={rotationAngleOuter}
             />
           </div>
-          <div className="absolute top-[20vh] h-[45vh] w-[75vw] z-102 overflow-hidden">
+          <div className="absolute top-[20vh] h-[45vh] w-[75vw] z-10 overflow-hidden">
             <CircularBorder
               id="inner"
               direction="counter"
@@ -172,7 +184,7 @@ export default function Home() {
             />
           </div>
           <div
-            className={`absolute top-[25vh] h-[40vh] w-[60vw] z-103 overflow-hidden transition-opacity duration-1000 ease-in-out ${
+            className={`absolute top-[25vh] h-[40vh] w-[60vw] z-20 overflow-hidden transition-opacity duration-1000 ease-in-out text-center ${
               isCarouselVisible ? "opacity-100" : "opacity-0"
             }`}
           >

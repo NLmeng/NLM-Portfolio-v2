@@ -70,9 +70,8 @@ export const OvalNavigator: React.FC<OvalNavigatorProps> = ({
 
   return (
     <div
-      className={`fixed top-1/2 transform -translate-y-1/2 z-[999] transition-all duration-500 ease-in-out ${
-        isExpanded ? "left-0" : "left-[-25px]"
-      }`}
+      className={`fixed top-1/2 transform -translate-y-1/2 z-[999] transition-all duration-500 ease-in-out left-[-25px]
+      `}
       onClick={toggleExpansion}
       style={{ cursor: "pointer" }}
     >
@@ -83,13 +82,15 @@ export const OvalNavigator: React.FC<OvalNavigatorProps> = ({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {isHovered && (
+        {(isHovered || isIdle) && (
           <ellipse
             cx="25"
             cy="100"
             rx="20"
             ry="100"
-            fill="var(--hover-overlay-color)"
+            style={{
+              animation: "pulse 8s ease-in-out infinite",
+            }}
           />
         )}
         <ellipse
