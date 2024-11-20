@@ -127,7 +127,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
                   : "bg-[var(--main-text-color)]"
               }`}
             />
-            <div className="mt-2">
+            <div className="mt-2 text-center">
               <div className="font-semibold">{item.year}</div>
               <div
                 className={`${TEXT_SIZE.MINI} h-[35px] w-[80px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis`}

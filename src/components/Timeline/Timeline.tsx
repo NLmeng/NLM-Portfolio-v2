@@ -22,7 +22,7 @@ export const Timeline: React.FC<TimelineProps> = ({
         href="/resume.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        className="underline after:content-['_↗'] text-[var(--main-text-color)] hover:text-[var(--button-hover-bg-color)] transition-colors duration-300"
+        className="underline after:content-['_↗'] text-[rgb(var(--color-orange))] transition-colors duration-300"
       >
         See Resume
       </a>
@@ -33,7 +33,7 @@ export const Timeline: React.FC<TimelineProps> = ({
         <h3 className="mt-2 font-bold tracking-tighter text-[rgb(var(--color-orange))]">
           {experienceData[currentIndex].title}
         </h3>
-        <p className="mt-4 flex-grow">
+        <p className="mt-4 flex-grow text-start">
           {experienceData[currentIndex].description}
         </p>
       </div>

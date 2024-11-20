@@ -1,5 +1,6 @@
 "use client";
 
+import { Highlight } from "@/components";
 import { PROJECTS, TEXT_SIZE } from "@/constants";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
@@ -23,7 +24,9 @@ interface TextStyle {
 export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   onRotate,
 }) => {
-  const projects = PROJECTS;
+  const projects = PROJECTS.filter((project) => project.display).sort(
+    (a, b) => a.id - b.id
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const [animating, setAnimating] = useState(false);
@@ -69,11 +72,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     right: {
       right: { transform: "translateX(50%) scale(0.1, 0.1)" },
       center: {
-        transform: "translateX(80%) translateY(60%) scale(0.3, 0.5)",
+        transform: "translateX(85%) translateY(40%) scale(0.3, 0.5)",
         opacity: 0.5,
       },
       left: {
-        transform: "translateX(175%) translateY(-50%) scale(2, 1)",
+        transform: "translateX(175%) translateY(-35%) scale(2, 1)",
         opacity: 1,
       },
       leftmost: {
@@ -84,11 +87,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     left: {
       left: { transform: "translateX(-50%) scale(0.1, 0.1)" },
       center: {
-        transform: "translateX(-80%) translateY(60%) scale(0.3, 0.5)",
+        transform: "translateX(-85%) translateY(40%) scale(0.3, 0.5)",
         opacity: 0.5,
       },
       right: {
-        transform: "translateX(-175%) translateY(-50%) scale(2, 1)",
+        transform: "translateX(-175%) translateY(-35%) scale(2, 1)",
         opacity: 1,
       },
       rightmost: {
@@ -104,7 +107,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     right: {
       left: {
         header: { transform: "translateX(-25%) scale(0.5, 1)" },
-        body: { fontSize: "calc(1rem / 1.5)" },
+        body: { fontSize: "calc(1rem / 2)" },
       },
       center: {
         header: {},
@@ -126,7 +129,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
     left: {
       right: {
         header: { transform: "translateX(-25%) scale(0.5, 1)" },
-        body: { fontSize: "calc(1rem / 1.5)" },
+        body: { fontSize: "calc(1rem / 2)" },
       },
       center: {
         header: {},
@@ -181,7 +184,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
 
     return style;
   };
-
+  // TODO: refactor
   return (
     <div
       {...handlers}
@@ -204,7 +207,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       </div>
 
       <div
-        className="flex-none w-[25%] opacity-50 cursor-pointer top-[25%] left-[-5%] relative scale-50 text-start"
+        className="flex-none w-[25%] h-[75%] opacity-50 cursor-pointer top-[25%] left-[-5%] relative scale-50 text-start"
         onClick={handleNext}
         style={getCardStyle("left")}
       >
@@ -215,30 +218,35 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           {projects[prevIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))]`}
+          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
           style={getTextStyle("left", "body")}
         >
           {projects[prevIndex].description}
         </p>
       </div>
 
-      <div className="grow text-start" style={getCardStyle("center")}>
+      <div className="grow text-start h-[75%]" style={getCardStyle("center")}>
         <header
-          className={`${TEXT_SIZE.HEADER} text-[rgb(var(--color-orange))]`}
+          className={`${TEXT_SIZE.HEADER} text-[rgb(var(--color-orange))] flex flex-row`}
           style={getTextStyle("center", "header")}
         >
           {projects[currentIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))]`}
+          className={`${TEXT_SIZE.BODY} pt-3 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
           style={getTextStyle("center", "body")}
         >
+          <span className={`${TEXT_SIZE.MINI} text-gray-400`}>
+            {projects[currentIndex].timeline}{" "}
+          </span>
+          <br />
           {projects[currentIndex].description}
+          <Highlight tech={projects[currentIndex].tech} limit={4} />
         </p>
       </div>
 
       <div
-        className="flex-none w-[25%] opacity-50 cursor-pointer top-[25%] right-[-5%] relative scale-50 text-start"
+        className="flex-none w-[25%] h-[75%] opacity-50 cursor-pointer top-[25%] right-[-5%] relative scale-50 text-start"
         onClick={handlePrev}
         style={getCardStyle("right")}
       >
@@ -249,7 +257,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           {projects[nextIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))]`}
+          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
           style={getTextStyle("right", "body")}
         >
           {projects[nextIndex].description}
@@ -270,6 +278,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
         >
           {projects[rightmostIndex].description}
         </p>
+      </div>
+
+      <div className="absolute top-[0%] text-[var(--main-text-color)] bg-[rgba(0,0,0,0.3)] p-2 rounded-lg transition-opacity hover:opacity-100 opacity-30">
+        {currentIndex + 1}/{projects.length}
       </div>
     </div>
   );

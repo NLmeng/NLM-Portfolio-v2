@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const { NUM_DOTS, DELAY_INCREMENT, ANGLE_PER_DOT } = CIRCULAR_PROPS;
-  const { FULL_NAME, PERSONAL_DESCRIPTIONS } = HOME_PROPS;
+  const { FULL_NAME, PERSONAL_DESCRIPTIONS, ONE_LINER } = HOME_PROPS;
   const [rotationAngleOuter, setRotationAngleOuter] = useState(0);
   const [rotationAngleInner, setRotationAngleInner] = useState(0);
   const currentSection = useCurrentSection();
@@ -121,17 +121,22 @@ export default function Home() {
 
         <section
           id="about"
-          className="h-screen flex items-center justify-center"
+          className="h-screen flex flex-row items-center justify-center"
         >
-          <div className="text-center">
-            <div
-              className={`text-[rgb(var(--color-orange))] ${TEXT_SIZE.MAIN_HEADER}`}
+          <div
+            className={`w-[20%] min-w-[20%] flex-grow flex flex-col space-between items-center`}
+          >
+            <h1
+              className={`text-[rgb(var(--color-orange))] ${TEXT_SIZE.MAIN_HEADER} font-bold tracking-tighter break-normal`}
             >
               {FULL_NAME}
-            </div>
-            <div className={`mt-4 ${TEXT_SIZE.MAIN_BODY}`}>
-              {PERSONAL_DESCRIPTIONS}
-            </div>
+            </h1>
+            <p className={`mt-1 ${TEXT_SIZE.MAIN_BODY}`}>{ONE_LINER}</p>
+          </div>
+          <div
+            className={`ml-12 max-w-[50%] ${TEXT_SIZE.MAIN_BODY} whitespace-pre-line`}
+          >
+            {PERSONAL_DESCRIPTIONS}
           </div>
         </section>
 
@@ -156,7 +161,7 @@ export default function Home() {
           <a
             href="/projects"
             rel="noopener noreferrer"
-            className="underline after:content-['_↗'] text-[var(--main-text-color)] hover:text-[var(--button-hover-bg-color)] transition-colors duration-300"
+            className="underline after:content-['_↗'] text-[rgb(var(--color-orange))] transition-colors duration-300"
           >
             See All Projects
           </a>
