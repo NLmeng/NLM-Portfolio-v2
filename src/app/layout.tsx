@@ -25,6 +25,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{String(metadata.title) ?? ""}</title>
+        <link rel="icon" href="/logo1.ico" type="image/x-icon" />
       </head>
       <body>
         <CustomCursor />
