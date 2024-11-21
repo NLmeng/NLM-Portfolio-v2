@@ -31,7 +31,7 @@ export default function Home() {
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [showDownButton, setShowDownButton] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(3);
+  const [currentIndex, setCurrentIndex] = useState<number>(3);
   const [isMounted, setIsMounted] = useState(false);
   const [width, setWidth] = useState(0);
 

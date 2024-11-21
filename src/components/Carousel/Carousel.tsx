@@ -60,7 +60,6 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   const handlers = useSwipeable({
     onSwipedLeft: handlePrev,
     onSwipedRight: handleNext,
-    preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
 

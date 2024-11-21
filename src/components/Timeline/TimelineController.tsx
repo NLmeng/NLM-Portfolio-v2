@@ -7,7 +7,7 @@ import { CaretRight, Pause } from "react-bootstrap-icons";
 
 interface TimelineControllerProps {
   currentIndex: number;
-  setCurrentIndex: (index: number) => void;
+  setCurrentIndex: (index: number | ((prevIndex: number) => number)) => void;
   experienceData: {
     year: string;
     title: string;
@@ -47,7 +47,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
           setProgress(0);
           elapsedTimeRef.current = 0;
           startTimeRef.current = Date.now();
-          setCurrentIndex((prevIndex) =>
+          setCurrentIndex((prevIndex: number) =>
             prevIndex === experienceData.length - 1 ? 0 : prevIndex + 1
           );
         }
@@ -96,7 +96,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
 
   return (
     <div
-      className={`transition-all duration-300 sticky bottom-8 flex items-center justify-center`}
+      className={`transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50`}
     >
       <IconButton
         onClick={handlePauseResume}
