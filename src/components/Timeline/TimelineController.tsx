@@ -96,7 +96,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
 
   return (
     <div
-      className={`transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50`}
+      className={`transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50 z-30`}
     >
       <IconButton
         onClick={handlePauseResume}
@@ -108,10 +108,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
         animationClassName="transition-transform duration-500"
       />
       <div className="relative flex items-center w-full max-w-3xl px-4">
-        <div
-          className="absolute w-[75%] left-[12%] top-[4px] md:top-[8px] h-[3px] md:h-[6px] bg-[var(--main-text-color)] z-0"
-          style={{ overflow: "hidden" }}
-        >
+        <div className="absolute w-[75%] left-[12%] top-[4px] md:top-[8px] h-[3px] md:h-[6px] bg-[var(--main-text-color)] z-0 overflow-hidden">
           <div
             style={{ width: `${fillPercentage}%` }}
             className="h-full bg-[var(--button-bg-color)]"
