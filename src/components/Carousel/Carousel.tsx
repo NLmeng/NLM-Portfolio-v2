@@ -225,7 +225,10 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
         </p>
       </div>
 
-      <div className="grow text-start h-[75%]" style={getCardStyle("center")}>
+      <div
+        className="grow text-start h-[75%] overflow-y-scroll"
+        style={getCardStyle("center")}
+      >
         <header
           className={`${TEXT_SIZE.HEADER} text-[rgb(var(--color-orange))] flex flex-row`}
           style={getTextStyle("center", "header")}
@@ -233,16 +236,18 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           {projects[currentIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-3 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
+          className={`${TEXT_SIZE.BODY} pt-3 border-t-[1px] border-[rgb(var(--border-color))]`}
           style={getTextStyle("center", "body")}
         >
           <span className={`${TEXT_SIZE.MINI} text-gray-400`}>
-            {projects[currentIndex].timeline}{" "}
+            {projects[currentIndex].timeline}
           </span>
           <br />
           {projects[currentIndex].description}
-          <Highlight keywords={projects[currentIndex].tech} limit={4} />
         </p>
+        <span>
+          <Highlight keywords={projects[currentIndex].tech} limit={4} />
+        </span>
       </div>
 
       <div
