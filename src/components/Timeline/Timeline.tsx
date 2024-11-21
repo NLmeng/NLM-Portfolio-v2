@@ -17,7 +17,7 @@ export const Timeline: React.FC<TimelineProps> = ({
   experienceData,
 }) => {
   return (
-    <div className="my-[100px] w-full min-w-full max-w-full h-[600px] max-h-[600px]">
+    <div className="w-full min-w-full xl:my-[100px] lg:mt-[200px] lg:mb-[100px] md:mt-[200px] md:mb[100px] mt-[250px] mb-[50px]">
       <a
         href="/resume.pdf"
         target="_blank"
@@ -26,7 +26,7 @@ export const Timeline: React.FC<TimelineProps> = ({
       >
         See Resume
       </a>
-      <div className="w-full min-w-full max-w-full h-[450px] max-h-[450px] p-6 shadow-md whitespace-pre-line overflow-hidden flex flex-col justify-start text-center">
+      <div className="w-full min-w-full max-w-full h-[450px] max-h-[450px] p-6 shadow-md whitespace-pre-line overflow-scroll flex flex-col justify-start text-center">
         <h2 className="font-semibold italic tracking-wide">
           {experienceData[currentIndex].year}
         </h2>

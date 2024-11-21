@@ -241,7 +241,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           </span>
           <br />
           {projects[currentIndex].description}
-          <Highlight tech={projects[currentIndex].tech} limit={4} />
+          <Highlight keywords={projects[currentIndex].tech} limit={4} />
         </p>
       </div>
 

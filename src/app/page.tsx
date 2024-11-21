@@ -1,5 +1,6 @@
 "use client";
 
+import { ProjectsGrid } from "@/app/projects/ProjectsGrid";
 import {
   ButtonA,
   CircularBorder,
@@ -31,6 +32,18 @@ export default function Home() {
   const [showDownButton, setShowDownButton] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(3);
+  const [isMounted, setIsMounted] = useState(false);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    setIsMounted(true);
+    setWidth(window.innerWidth);
+
+    const handleResize = () => setWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -101,30 +114,41 @@ export default function Home() {
   };
 
   return (
-    <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)]">
-      {/* TODO: remove on mobile*/}
-      <LeftNavigator
-        onNavigate={handleNavigationClick}
-        isExpanded={isNavExpanded}
-      />
-      <OvalNavigator
-        isExpanded={isNavExpanded}
-        toggleExpansion={toggleNavExpansion}
-      />
-      {/* */}
+    <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)] w-fit">
+      {isMounted && width >= 768 && (
+        <>
+          <LeftNavigator
+            onNavigate={handleNavigationClick}
+            isExpanded={isNavExpanded}
+          />
+          <OvalNavigator
+            isExpanded={isNavExpanded}
+            toggleExpansion={toggleNavExpansion}
+          />
+        </>
+      )}
+
       <main
-        className={`transition-all duration-500 ease-in-out w-full mr-20 flex justify-center items-center flex-col ${
-          isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] ml-[25%]" : "ml-20"
+        className={`transition-all duration-500 ease-in-out w-full md:mr-20 mx-10 flex justify-center items-center flex-col ${
+          isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] md:ml-[25%]" : "md:ml-20"
         }`}
       >
         <Header />
 
         <section
           id="about"
-          className="h-screen flex flex-row items-center justify-center"
+          className={`${
+            isMounted && width >= 768
+              ? "h-screen flex flex-row items-center justify-center"
+              : "h-auto flex flex-col items-center justify-center min-h-[800px]"
+          }`}
         >
           <div
-            className={`w-[20%] min-w-[20%] flex-grow flex flex-col space-between items-center`}
+            className={`flex-grow flex flex-col items-center ${
+              isMounted && width >= 768
+                ? "w-[20%] min-w-[20%] space-between"
+                : "text-center mt-36"
+            }`}
           >
             <h1
               className={`text-[rgb(var(--color-orange))] ${TEXT_SIZE.MAIN_HEADER} font-bold tracking-tighter break-normal`}
@@ -134,7 +158,11 @@ export default function Home() {
             <p className={`mt-1 ${TEXT_SIZE.MAIN_BODY}`}>{ONE_LINER}</p>
           </div>
           <div
-            className={`ml-12 max-w-[50%] ${TEXT_SIZE.MAIN_BODY} whitespace-pre-line`}
+            className={`${TEXT_SIZE.MAIN_BODY} whitespace-pre-line ${
+              isMounted && width >= 768
+                ? "ml-12 max-w-[50%]"
+                : "whitespace-pre-line mb-36"
+            }`}
           >
             {PERSONAL_DESCRIPTIONS}
           </div>
@@ -158,43 +186,55 @@ export default function Home() {
         <div
           className={`top-[20vh] relative z-20 overflow-hidden self-baseline ${TEXT_SIZE.BODY}`}
         >
-          <a
-            href="/projects"
-            rel="noopener noreferrer"
-            className="underline after:content-['_↗'] text-[rgb(var(--color-orange))] transition-colors duration-300"
-          >
-            See All Projects
-          </a>
+          {isMounted && width >= 768 && (
+            <a
+              href="/projects"
+              rel="noopener noreferrer"
+              className="underline after:content-['_↗'] text-[rgb(var(--color-orange))] transition-colors duration-300"
+            >
+              See All Projects
+            </a>
+          )}
         </div>
 
         <section
           id="projects"
-          className={`z-10 relative h-[65vh] flex flex-col justify-end items-center ${TEXT_SIZE.BODY}`}
+          className={`z-10 relative ${
+            isMounted && width >= 768 ? "h-[65vh]" : "min-h-screen mt-10"
+          } flex flex-col justify-end items-center ${TEXT_SIZE.BODY}`}
         >
-          <div className="absolute top-[15vh] h-[50vh] w-[80vw] z-10 overflow-hidden">
-            <CircularBorder
-              id="outer"
-              direction="clockwise"
-              numDots={NUM_DOTS}
-              color="var(--main-text-color)"
-              rotationAngle={rotationAngleOuter}
-            />
-          </div>
-          <div className="absolute top-[20vh] h-[45vh] w-[75vw] z-10 overflow-hidden">
-            <CircularBorder
-              id="inner"
-              direction="counter"
-              numDots={NUM_DOTS}
-              rotationAngle={rotationAngleInner}
-            />
-          </div>
-          <div
-            className={`absolute top-[25vh] h-[40vh] w-[60vw] z-20 overflow-hidden transition-opacity duration-1000 ease-in-out text-center ${
-              isCarouselVisible ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <ProjectCarousel onRotate={handleRotate} />
-          </div>
+          {isMounted && width >= 768 ? (
+            <>
+              <div className="absolute top-[15vh] h-[50vh] md:w-[80vw] w-[100vw] z-10 overflow-hidden">
+                <CircularBorder
+                  id="outer"
+                  direction="clockwise"
+                  numDots={NUM_DOTS}
+                  color="var(--main-text-color)"
+                  rotationAngle={rotationAngleOuter}
+                />
+              </div>
+              <div className="absolute top-[20vh] h-[45vh] md:w-[75vw] w-[95vw] z-10 overflow-hidden">
+                <CircularBorder
+                  id="inner"
+                  direction="counter"
+                  numDots={NUM_DOTS}
+                  rotationAngle={rotationAngleInner}
+                />
+              </div>
+              <div
+                className={`absolute top-[25vh] h-[40vh] w-[60vw] z-20 overflow-hidden transition-opacity duration-1000 ease-in-out text-center ${
+                  isCarouselVisible ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <ProjectCarousel onRotate={handleRotate} />
+              </div>
+            </>
+          ) : (
+            <div className="w-full px-4 mt-36">
+              <ProjectsGrid />
+            </div>
+          )}
         </section>
       </main>
       {showDownButton && (
