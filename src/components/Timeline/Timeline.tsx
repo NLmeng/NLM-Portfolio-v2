@@ -26,7 +26,7 @@ export const Timeline: React.FC<TimelineProps> = ({
       >
         See Resume
       </a>
-      <div className="w-full min-w-full max-w-full h-[450px] max-h-[450px] p-6 shadow-md whitespace-pre-line overflow-scroll flex flex-col justify-start text-center">
+      <div className="w-full min-w-full max-w-full h-[450px] max-h-[450px] p-6 shadow-md whitespace-pre-line overflow-scroll hide-scroll flex flex-col justify-start text-center">
         <h2 className="font-semibold italic tracking-wide">
           {experienceData[currentIndex].year}
         </h2>

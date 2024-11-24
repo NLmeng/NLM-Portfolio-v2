@@ -217,7 +217,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           {projects[prevIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
+          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll hide-scroll`}
           style={getTextStyle("left", "body")}
         >
           {projects[prevIndex].description}
@@ -225,7 +225,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
       </div>
 
       <div
-        className="grow text-start h-[75%] overflow-y-scroll"
+        className="grow text-start h-[75%] overflow-y-scroll hide-scroll"
         style={getCardStyle("center")}
       >
         <header
@@ -261,7 +261,7 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
           {projects[nextIndex].title}
         </header>
         <p
-          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll`}
+          className={`${TEXT_SIZE.BODY} pt-6 border-t-[1px] border-[rgb(var(--border-color))] max-h-[100%] overflow-scroll hide-scroll`}
           style={getTextStyle("right", "body")}
         >
           {projects[nextIndex].description}
