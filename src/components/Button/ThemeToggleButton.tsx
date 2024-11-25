@@ -15,10 +15,40 @@ export const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = ({
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const getCookie = (name: string) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift();
+    return null;
+  };
+
+  const setCookie = (name: string, value: string, days: number) => {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+  };
+
+  useEffect(() => {
+    const savedTheme = getCookie("pref-theme-cookie");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.body.classList.add("dark-mode");
+      document.body.classList.remove("light-mode");
+    } else {
+      setIsDarkMode(false);
+      document.body.classList.add("light-mode");
+      document.body.classList.remove("dark-mode");
+    }
+  }, []);
+
   const handleClick = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      setIsDarkMode((prev) => !prev);
+      setIsDarkMode((prev) => {
+        const newMode = !prev;
+        setCookie("pref-theme-cookie", newMode ? "dark" : "light", 365);
+        return newMode;
+      });
     }, 250);
 
     setTimeout(() => {
