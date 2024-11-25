@@ -107,7 +107,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
         title="Pause/Resume Timeline"
         animationClassName="transition-transform duration-500"
       />
-      <div className="relative flex items-center w-full max-w-3xl px-4">
+      <div className="relative flex items-center px-4">
         <div className="absolute w-[75%] left-[12%] top-[4px] md:top-[8px] h-[3px] md:h-[6px] bg-[var(--main-text-color)] z-0 overflow-hidden">
           <div
             style={{ width: `${fillPercentage}%` }}
@@ -127,7 +127,7 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
             <div className="mt-2 text-center">
               <div className="font-semibold">{item.year}</div>
               <div
-                className={`${TEXT_SIZE.MINI} h-[35px] w-[80px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis`}
+                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis`}
               >
                 {item.subtitle}
               </div>

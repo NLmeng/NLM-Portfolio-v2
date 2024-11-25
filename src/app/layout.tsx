@@ -14,7 +14,7 @@ const roboto_mono = Roboto_Mono({
   display: "swap",
   variable: "--font-roboto-mono",
 });
-// TODO: check if conflict with style.css
+
 export default function RootLayout({
   children,
 }: {

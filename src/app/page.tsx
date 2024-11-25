@@ -129,7 +129,7 @@ export default function Home() {
       )}
 
       <main
-        className={`transition-all duration-500 ease-in-out w-full md:mr-20 mx-10 flex justify-center items-center flex-col ${
+        className={`transition-all duration-500 ease-in-out md:mr-20 md:w-[100%] w-[90vw] mx-[5vw] flex justify-center items-center flex-col ${
           isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] md:ml-[25%]" : "md:ml-20"
         }`}
       >
