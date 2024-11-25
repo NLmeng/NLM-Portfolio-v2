@@ -206,7 +206,7 @@ export const EXPERIENCE_DATA = [
       Fully remote classes gave me a lot of time to explore. Many ideas were inspired by what I learnt from school and it was my own way to practice what I learnt.
 
       Key Projects:
-      - Maze Solver: A pathfinding algorithm project utilizing the A* algorithm and data structures with optimized heuristics for faster pathfinding. It features a fully interactive board with hint and solve functionalities for better visualization.
+      - Maze Solver: A pathfinding algorithm project utilizing the A* algorithm and data structures with optimized heuristics for faster pathfinding. It features a fully interactive board with hint and solve functionalities for better visualization. I also expanded on this project later on by translating the codebase to TypeScript to host on my portfolio.
       - Inventory Management System: My first full-stack MERN application, featuring item addition, deletion, and a carousel for easy navigation. It also included a custom modal dialog for item details, search, and sorting.
       - Data Query App: Developed interactive queries via REST APIs and a Wikipedia-like application for astronomical entities using MySQL and React. 
       `,

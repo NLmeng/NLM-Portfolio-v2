@@ -115,19 +115,24 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
           />
         </div>
         {experienceData.map((item, index) => (
-          <div key={index} className="flex flex-col items-center flex-1 z-10">
+          <div
+            key={index}
+            onClick={() => handleNavigation(index)}
+            className="flex flex-col items-center flex-1 z-10 cursor-pointer group"
+          >
             <button
-              onClick={() => handleNavigation(index)}
-              className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 ${
+              className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 group-hover:bg-[var(--button-hover-bg-color)] ${
                 index === currentIndex
                   ? "bg-[var(--button-bg-color)]"
                   : "bg-[var(--main-text-color)]"
               }`}
             />
             <div className="mt-2 text-center">
-              <div className="font-semibold">{item.year}</div>
+              <div className="font-semibold group-hover:text-[var(--button-hover-bg-color)]">
+                {item.year}
+              </div>
               <div
-                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis`}
+                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis group-hover:text-[var(--button-hover-bg-color)]`}
               >
                 {item.subtitle}
               </div>
