@@ -135,7 +135,9 @@ export default function Home() {
 
       <main
         className={`transition-all duration-500 ease-in-out md:mr-20 md:w-[100%] w-[90vw] mx-[5vw] flex justify-center items-center flex-col ${
-          isNavExpanded ? "xl:ml-[15%] lg:ml-[20%] md:ml-[25%]" : "md:ml-20"
+          isNavExpanded && width >= 768 && height >= 768
+            ? "xl:ml-[15%] lg:ml-[20%] md:ml-[25%]"
+            : "md:ml-20"
         }`}
       >
         <Header />
@@ -205,7 +207,9 @@ export default function Home() {
         <section
           id="projects"
           className={`z-10 relative ${
-            isMounted && width >= 768 && height >= 768 ? "h-[65vh]" : "min-h-screen mt-10"
+            isMounted && width >= 768 && height >= 768
+              ? "h-[65vh]"
+              : "min-h-screen mt-10"
           } flex flex-col justify-end items-center ${TEXT_SIZE.BODY}`}
         >
           {isMounted && width >= 768 && height >= 768 ? (
