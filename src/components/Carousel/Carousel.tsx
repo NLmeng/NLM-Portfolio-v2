@@ -24,8 +24,8 @@ interface TextStyle {
 export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   onRotate,
 }) => {
-  const projects = PROJECTS.filter((project) => project.display).sort(
-    (a, b) => a.id - b.id
+  const projects = PROJECTS.filter((project: { display: any; }) => project.display).sort(
+    (a: { id: number; }, b: { id: number; }) => a.id - b.id
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
