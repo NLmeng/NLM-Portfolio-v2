@@ -34,12 +34,17 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState<number>(3);
   const [isMounted, setIsMounted] = useState(false);
   const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
     setIsMounted(true);
     setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
 
-    const handleResize = () => setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -115,7 +120,7 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen bg-[var(--main-bg-color)] text-[var(--main-text-color)] w-fit">
-      {isMounted && width >= 768 && (
+      {isMounted && width >= 768 && height >= 768 && (
         <>
           <LeftNavigator
             onNavigate={handleNavigationClick}
@@ -138,14 +143,14 @@ export default function Home() {
         <section
           id="about"
           className={`${
-            isMounted && width >= 768
+            isMounted && width >= 768 && height >= 768
               ? "h-screen flex flex-row items-center justify-center"
               : "h-auto flex flex-col items-center justify-center min-h-[800px]"
           }`}
         >
           <div
             className={`flex-grow flex flex-col items-center ${
-              isMounted && width >= 768
+              isMounted && width >= 768 && height >= 768
                 ? "w-[20%] min-w-[20%] space-between"
                 : "text-center mt-36"
             }`}
@@ -159,7 +164,7 @@ export default function Home() {
           </div>
           <div
             className={`${TEXT_SIZE.MAIN_BODY} whitespace-pre-line ${
-              isMounted && width >= 768
+              isMounted && width >= 768 && height >= 768
                 ? "ml-12 max-w-[50%]"
                 : "whitespace-pre-line mb-36"
             }`}
@@ -186,7 +191,7 @@ export default function Home() {
         <div
           className={`top-[20vh] relative z-20 overflow-hidden self-baseline ${TEXT_SIZE.BODY}`}
         >
-          {isMounted && width >= 768 && (
+          {isMounted && width >= 768 && height >= 768 && (
             <a
               href="/projects"
               rel="noopener noreferrer"
@@ -200,10 +205,10 @@ export default function Home() {
         <section
           id="projects"
           className={`z-10 relative ${
-            isMounted && width >= 768 ? "h-[65vh]" : "min-h-screen mt-10"
+            isMounted && width >= 768 && height >= 768 ? "h-[65vh]" : "min-h-screen mt-10"
           } flex flex-col justify-end items-center ${TEXT_SIZE.BODY}`}
         >
-          {isMounted && width >= 768 ? (
+          {isMounted && width >= 768 && height >= 768 ? (
             <>
               <div className="absolute top-[15vh] h-[50vh] md:w-[80vw] w-[100vw] z-10 overflow-hidden">
                 <CircularBorder

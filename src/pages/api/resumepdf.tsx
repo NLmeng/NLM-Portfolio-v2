@@ -14,8 +14,6 @@ export default async function handler(
 
     const response = await fetch(s3Url, { redirect: "manual" });
 
-    console.log("Fetch response status:", response.status);
-
     if (!response.ok) {
       res.status(500).send("Error fetching resume");
       return;
