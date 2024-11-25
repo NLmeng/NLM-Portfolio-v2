@@ -1,7 +1,11 @@
 import { CustomCursor } from "@/components";
-import { metadata } from "@/constants";
 import "@/styles/globals.css";
+import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
+
+const metadata: Metadata = {
+  title: "Lymeng Naret",
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,7 +18,7 @@ const roboto_mono = Roboto_Mono({
   display: "swap",
   variable: "--font-roboto-mono",
 });
-// TODO: check if conflict with style.css
+
 export default function RootLayout({
   children,
 }: {

@@ -38,7 +38,7 @@ const config: Config = {
     "text-[10px]",
     "md:text-[12px]",
   ],
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
 
 export default config;
