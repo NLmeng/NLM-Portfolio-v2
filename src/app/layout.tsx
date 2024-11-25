@@ -1,7 +1,11 @@
 import { CustomCursor } from "@/components";
-import { metadata } from "@/constants";
 import "@/styles/globals.css";
+import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
+
+const metadata: Metadata = {
+  title: "Lymeng Naret",
+};
 
 const inter = Inter({
   subsets: ["latin"],
