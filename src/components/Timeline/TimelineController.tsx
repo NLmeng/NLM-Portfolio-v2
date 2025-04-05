@@ -32,14 +32,11 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-
     if (!isPaused) {
       startTimeRef.current = Date.now();
-
       intervalRef.current = setInterval(() => {
         const now = Date.now();
         const elapsed = now - startTimeRef.current + elapsedTimeRef.current;
-
         if (elapsed < duration) {
           const progressPercentage = (elapsed / duration) * 100;
           setProgress(progressPercentage);
@@ -53,11 +50,8 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
         }
       }, 10);
     }
-
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [isPaused, currentIndex, setCurrentIndex, experienceData.length]);
 
@@ -72,11 +66,9 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
 
   const handlePauseResume = () => {
     if (!isPaused) {
-      // Pausing: Store the elapsed time
       const now = Date.now();
       elapsedTimeRef.current += now - startTimeRef.current;
     } else {
-      // Resuming: Reset the start time
       startTimeRef.current = Date.now();
     }
     setIsPaused(!isPaused);
@@ -85,33 +77,35 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
   const totalSteps = experienceData.length - 1;
   const progressPerStep = 100 / totalSteps;
   const baseFill = currentIndex * progressPerStep;
-
-  // Prevent incrementalFill from adding at the last index
   const incrementalFill =
     currentIndex === experienceData.length - 1
       ? 0
       : (progress / 100) * progressPerStep;
-
   const fillPercentage = Math.min(baseFill + incrementalFill, 100);
+  const k = experienceData.length;
 
   return (
-    <div
-      className={`transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50 z-30`}
-    >
+    <div className="transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50 z-30">
       <IconButton
         onClick={handlePauseResume}
         icon={isPaused ? <CaretRight size={12} /> : <Pause size={12} />}
         position=""
-        className="text-[var(--main-text-color)] hover:bg-[var(--button-hover-bg-color)] p-[0px] md:p-[6px] self-baseline"
+        className="text-[var(--main-text-color)] hover:bg-[var(--button-bg-color)] p-[0px] md:p-[6px] self-baseline"
         ariaLabel="Pause/Resume Timeline"
         title="Pause/Resume Timeline"
         animationClassName="transition-transform duration-500"
       />
-      <div className="relative flex items-center px-4">
-        <div className="absolute w-[75%] left-[12%] top-[4px] md:top-[8px] h-[3px] md:h-[6px] bg-[var(--main-text-color)] z-0 overflow-hidden">
+      <div className="relative flex items-center w-full">
+        <div
+          className="absolute top-[4px] md:top-[8px] z-0 h-[3px] md:h-[6px] bg-[var(--main-text-color)]"
+          style={{
+            left: `${50 / k}%`,
+            width: `${(100 * (k - 1)) / k}%`
+          }}
+        >
           <div
-            style={{ width: `${fillPercentage}%` }}
             className="h-full bg-[var(--button-bg-color)]"
+            style={{ width: `${fillPercentage}%` }}
           />
         </div>
         {experienceData.map((item, index) => (
@@ -121,18 +115,18 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
             className="flex flex-col items-center flex-1 z-10 cursor-pointer group"
           >
             <button
-              className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 group-hover:bg-[var(--button-hover-bg-color)] ${
+              className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 group-hover:bg-[var(--button-bg-color)] ${
                 index === currentIndex
                   ? "bg-[var(--button-bg-color)]"
                   : "bg-[var(--main-text-color)]"
               }`}
             />
             <div className="mt-2 text-center">
-              <div className="font-semibold group-hover:text-[var(--button-hover-bg-color)]">
+              <div className="font-semibold group-hover:text-[var(--button-bg-color)]">
                 {item.year}
               </div>
               <div
-                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis group-hover:text-[var(--button-hover-bg-color)]`}
+                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis group-hover:text-[var(--button-bg-color)]`}
               >
                 {item.subtitle}
               </div>
