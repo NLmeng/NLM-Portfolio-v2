@@ -23,10 +23,40 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
 }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [dotWidth, setDotWidth] = useState(100);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(Date.now());
   const elapsedTimeRef = useRef<number>(0);
   const duration = 5000;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setDotWidth(40);
+      } else if (width < 1024) {
+        setDotWidth(80);
+      } else if (width < 1280) {
+        setDotWidth(120);
+      } else {
+        setDotWidth(160);
+      } 
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const scrollToMiddle = () => {
+      if (scrollContainerRef.current) {
+        const { scrollWidth, clientWidth } = scrollContainerRef.current;
+        scrollContainerRef.current.scrollLeft = (scrollWidth - clientWidth) / 2;
+      }
+    };
+    requestAnimationFrame(scrollToMiddle);
+  }, [dotWidth, experienceData.length]);
 
   useEffect(() => {
     if (intervalRef.current) {
@@ -82,10 +112,13 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
       ? 0
       : (progress / 100) * progressPerStep;
   const fillPercentage = Math.min(baseFill + incrementalFill, 100);
-  const k = experienceData.length;
+
+  // const lineLeft = dotWidth * (experienceData.length - 1) * 0.05 + dotWidth / 2;
+  const lineLeft = dotWidth;
+  const lineWidth = (experienceData.length - 1) * dotWidth;
 
   return (
-    <div className="transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50 z-30">
+    <div className="w-full transition-all duration-300 sticky bottom-8 flex items-center justify-center rounded-lg transition-opacity hover:opacity-100 opacity-50 z-30">
       <IconButton
         onClick={handlePauseResume}
         icon={isPaused ? <CaretRight size={12} /> : <Pause size={12} />}
@@ -95,44 +128,58 @@ export const TimelineController: React.FC<TimelineControllerProps> = ({
         title="Pause/Resume Timeline"
         animationClassName="transition-transform duration-500"
       />
-      <div className="relative flex items-center w-full">
+
+      <div className="relative w-full sm:max-w-[450px] md:max-w-[600px] lg:max-w-[750px] xl:max-w-[900px] 2xl:max-w-[1050px] max-w-[300px] mx-auto overflow-hidden">
         <div
-          className="absolute top-[4px] md:top-[8px] z-0 h-[3px] md:h-[6px] bg-[var(--main-text-color)]"
-          style={{
-            left: `${50 / k}%`,
-            width: `${(100 * (k - 1)) / k}%`
-          }}
+          ref={scrollContainerRef}
+          className="relative flex items-center overflow-x-auto"
         >
           <div
-            className="h-full bg-[var(--button-bg-color)]"
-            style={{ width: `${fillPercentage}%` }}
-          />
-        </div>
-        {experienceData.map((item, index) => (
-          <div
-            key={index}
-            onClick={() => handleNavigation(index)}
-            className="flex flex-col items-center flex-1 z-10 cursor-pointer group"
+            className="relative flex items-center"
+            style={{ padding: `0 ${dotWidth / 2}px` }}
           >
-            <button
-              className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 group-hover:bg-[var(--button-bg-color)] ${
-                index === currentIndex
-                  ? "bg-[var(--button-bg-color)]"
-                  : "bg-[var(--main-text-color)]"
-              }`}
-            />
-            <div className="mt-2 text-center">
-              <div className="font-semibold group-hover:text-[var(--button-bg-color)]">
-                {item.year}
-              </div>
+            <div
+              className="absolute top-[4px] md:top-[8px] z-0 h-[3px] md:h-[6px] bg-[var(--main-text-color)]"
+              style={{
+                left: `${lineLeft}px`,
+                width: `${lineWidth}px`,
+              }}
+            >
               <div
-                className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis group-hover:text-[var(--button-bg-color)]`}
-              >
-                {item.subtitle}
-              </div>
+                className="h-full bg-[var(--button-bg-color)]"
+                style={{ width: `${fillPercentage}%` }}
+              />
             </div>
+            {experienceData.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => handleNavigation(index)}
+                className="flex flex-col items-center z-10 cursor-pointer group"
+                style={{ width: `${dotWidth}px` }}
+              >
+                <button
+                  className={`w-3 h-3 md:w-6 md:h-6 rounded-full transition-colors duration-300 group-hover:bg-[var(--button-bg-color)] ${
+                    index === currentIndex
+                      ? "bg-[var(--button-bg-color)]"
+                      : "bg-[var(--main-text-color)]"
+                  }`}
+                />
+                <div className="mt-2 text-center">
+                  <div className="font-semibold group-hover:text-[var(--button-bg-color)]">
+                    {item.year}
+                  </div>
+                  <div
+                    className={`${TEXT_SIZE.MINI} h-[35px] md:h-[50px] md:w-[100px] overflow-hidden text-ellipsis group-hover:text-[var(--button-bg-color)]`}
+                  >
+                    {item.subtitle}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+        {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-[5%] bg-neutral-200 filter blur-2xl z-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-[5%] bg-neutral-200 filter blur-2xl z-40" /> */}
       </div>
     </div>
   );
