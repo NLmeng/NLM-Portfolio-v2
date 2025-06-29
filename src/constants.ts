@@ -29,3 +29,5 @@ export const TEXT_SIZE = {
   BODY: process.env.NEXT_PUBLIC_TEXT_SIZE_BODY,
   MINI: process.env.NEXT_PUBLIC_TEXT_SIZE_MINI,
 };
+
+export const BETA_FLAG = String(process.env.NEXT_PUBLIC_ENABLE_TIMELINE_BETA);
