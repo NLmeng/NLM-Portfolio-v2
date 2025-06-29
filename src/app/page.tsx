@@ -10,14 +10,17 @@ import {
   ProjectCarousel,
   Timeline,
   TimelineController,
+  TimelineControllerBeta,
 } from "@/components";
 import {
+  BETA_FLAG,
   CIRCULAR_PROPS,
   EXPERIENCE_DATA,
   HOME_PROPS,
   TEXT_SIZE,
 } from "@/constants";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -35,6 +38,8 @@ export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const params = useSearchParams();
+  const isBeta = BETA_FLAG === "true" && params!.get("beta") === "1";
 
   useEffect(() => {
     setIsMounted(true);
@@ -183,11 +188,19 @@ export default function Home() {
             currentIndex={currentIndex}
             experienceData={EXPERIENCE_DATA}
           />
-          <TimelineController
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            experienceData={EXPERIENCE_DATA}
-          />
+          {isBeta ? (
+            <TimelineControllerBeta
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              experienceData={EXPERIENCE_DATA}
+            />
+          ) : (
+            <TimelineController
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              experienceData={EXPERIENCE_DATA}
+            />
+          )}
         </section>
 
         <div
