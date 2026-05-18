@@ -34,6 +34,14 @@
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "resolutions": {
-    "glob": "10.5.0"
+    "glob": "10.5.0",
+    "@eslint/config-array/minimatch": "3.1.3",
+    "@eslint/eslintrc/minimatch": "3.1.3",
+    "eslint/minimatch": "3.1.3",
+    "eslint-plugin-import/minimatch": "3.1.3",
+    "eslint-plugin-jsx-a11y/minimatch": "3.1.3",
+    "eslint-plugin-react/minimatch": "3.1.3",
+    "@typescript-eslint/typescript-estree/minimatch": "9.0.7",
+    "glob/minimatch": "9.0.7"
   }
 }
