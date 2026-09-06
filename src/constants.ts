@@ -17,9 +17,9 @@ export const HOME_PROPS = {
   PERSONAL_DESCRIPTIONS: process.env.NEXT_PUBLIC_HOME_PERSONAL_DESCRIPTIONS,
 };
 
-export const PROJECTS = JSON.parse(process.env.NEXT_PUBLIC_PROJECTS || "");
+export const PROJECTS = JSON.parse(process.env.NEXT_PUBLIC_PROJECTS || "[]");
 export const EXPERIENCE_DATA = JSON.parse(
-  process.env.NEXT_PUBLIC_EXPERIENCE_DATA || ""
+  process.env.NEXT_PUBLIC_EXPERIENCE_DATA || "[]"
 );
 
 export const TEXT_SIZE = {
