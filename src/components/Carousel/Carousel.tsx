@@ -2,6 +2,7 @@
 
 import { Highlight } from "@/components";
 import { PROJECTS, TEXT_SIZE } from "@/constants";
+import { useCookieIndex } from "@/hooks/useCookieIndex";
 import React, { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
@@ -27,7 +28,11 @@ export const ProjectCarousel: React.FC<ProjectCarouselProps> = ({
   const projects = PROJECTS.filter((project: { display: any; }) => project.display).sort(
     (a: { id: number; }, b: { id: number; }) => a.id - b.id
   );
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useCookieIndex(
+    "pref-project-index",
+    0,
+    projects.length
+  );
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
   const [animating, setAnimating] = useState(false);
 
