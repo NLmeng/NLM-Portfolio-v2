@@ -19,9 +19,11 @@ import {
   HOME_PROPS,
   TEXT_SIZE,
 } from "@/constants";
+import { useCookieIndex } from "@/hooks/useCookieIndex";
 import { useCurrentSection } from "@/hooks/useCurrentSection";
+import { getCookie, setCookie } from "@/utils/cookies";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const { NUM_DOTS, DELAY_INCREMENT, ANGLE_PER_DOT } = CIRCULAR_PROPS;
@@ -34,7 +36,12 @@ export default function Home() {
   const [isCarouselVisible, setIsCarouselVisible] = useState(false);
   const [showDownButton, setShowDownButton] = useState(true);
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState<number>(3);
+  const [currentIndex, setCurrentIndex] = useCookieIndex(
+    "pref-timeline-index",
+    3,
+    EXPERIENCE_DATA.length
+  );
+  const sectionRestored = useRef(false);
   const [isMounted, setIsMounted] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -54,6 +61,12 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (sectionRestored.current) {
+      setCookie("pref-section", currentSection.toLowerCase());
+    }
+  }, [currentSection]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -98,7 +111,10 @@ export default function Home() {
     setIsNavExpanded((prev) => !prev);
   };
 
-  const handleNavigationClick = (sectionId: string) => {
+  const handleNavigationClick = (
+    sectionId: string,
+    behavior: ScrollBehavior = "smooth"
+  ) => {
     const section = document.getElementById(sectionId);
     if (section) {
       const sectionRect = section.getBoundingClientRect();
@@ -108,10 +124,18 @@ export default function Home() {
 
       window.scrollTo({
         top: scrollPosition,
-        behavior: "smooth",
+        behavior,
       });
     }
   };
+
+  // Runs once the mounted layout is rendered, so section offsets are final.
+  useEffect(() => {
+    if (!isMounted || sectionRestored.current) return;
+    const saved = getCookie("pref-section");
+    if (saved && saved !== "about") handleNavigationClick(saved, "instant");
+    sectionRestored.current = true;
+  }, [isMounted]);
 
   const handleRotate = (direction: "left" | "right") => {
     if (direction === "right") {
